@@ -39,8 +39,8 @@ Vagrant.configure("2") do |config|
                                       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz; \
                                       cp "${configdir}/.xmobarrc" "${HOME}/.xmobarrc"; \
                                       cp "${configdir}/.wallpaper.jpg" "${HOME}/.wallpaper.jpg"; \
-                                      mkdir -p "${HOME}/xmonad"; \
-                                      cp "${configdir}/xmonad.hs" "${HOME}/xmonad/xmonad.hs"
+                                      mkdir -p "${HOME}/.xmonad"; \
+                                      cp "${configdir}/xmonad.hs" "${HOME}/.xmonad/xmonad.hs"
                                )
   SHELL
 end
