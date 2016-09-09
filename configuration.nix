@@ -134,19 +134,26 @@
 
   programs.bash.enableCompletion = true;
 
-  programs.bash.shellAliases.du = "du -h" ;
-  programs.bash.shellAliases.df = " df -h" ;
-  programs.bash.shellAliases.ag = "ag --color-line-number=2" ;
-  programs.bash.shellAliases.vim = "nvim" ;
-  programs.bash.shellAliases.build = "./build/build.sh" ;
-  programs.bash.shellAliases.see = "./bin/check_role.sh" ;
+  programs.bash.shellAliases = {
+    la = " ls -alh";
+    ls = " ls --color=tty";
+    du = " du -h";
+    df = " df -h";
+    ag = "ag --color-line-number=2";
+    vim = "nvim";
+    build = "./build/build.sh";
+    see = "./bin/check_role.sh";
+  };
 
-  programs.bash.shellInit = ''
+  programs.bash.interactiveShellInit = ''
     shopt -s autocd
+    shopt -s histappend
 
     function presources () {
         puppetresources -p . -o $1 --hiera ./tests/hiera.yaml --pdbfile tests/facts.yaml ''${@:2}
     }
+
+    export HISTCONTROL=ignoreboth
 
     #. $(autojump-share)/autojump.bash
   '';
