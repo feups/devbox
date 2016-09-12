@@ -20,16 +20,14 @@ Vagrant.configure("2") do |config|
     scm_api=$2
     version="#{ENV['DEVBOX_WITH_VERSION']}"
     if [[ -z "${version}" ]]; then
-      grepexpr='(?<="tag_name":).*?[^\\\\](?=",)'
-      _version=$(curl -s "${scm_api}/latest" | grep -oP "${grepexpr}")
-      version="${_version#*\\"}"
+      version="$(curl -s ${scm_api}/latest | jq -r .tag_name)"
     else
       echo "Overriding latest version";
     fi
     configdir="devbox-${version}"
     [[ -d "/tmp/system" ]] || mkdir /tmp/system
     if [[ ! -d "/tmp/system/${configdir}" ]]; then
-      echo "fetching ${version} configuration from ${scm_uri}";
+      echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/system > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       cp --verbose "${configdir}/configuration.nix" "/etc/nixos/configuration.nix";
@@ -44,16 +42,14 @@ Vagrant.configure("2") do |config|
     scm_api=$2
     version="#{ENV['DEVBOX_WITH_VERSION']}"
     if [[ -z "${version}" ]]; then
-      grepexpr='(?<="tag_name":).*?[^\\\\](?=",)'
-      _version=$(curl -s "${scm_api}/latest" | grep -oP "${grepexpr}")
-      version="${_version#*\\"}"
+      version="$(curl -s ${scm_api}/latest | jq -r .tag_name)"
     else
       echo "Overriding latest version";
     fi
     configdir="devbox-${version}"
     [[ -d "/tmp/user" ]] || mkdir /tmp/user
     if [[ ! -d "/tmp/user/${configdir}" ]]; then
-      echo "fetching ${version} configuration from ${scm_uri}";
+      echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/user > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       cp "${configdir}/.xmobarrc" "${HOME}/.xmobarrc";
