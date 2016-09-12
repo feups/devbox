@@ -18,17 +18,23 @@ Vagrant.configure("2") do |config|
   config.vm.provision "system", args: [scm_uri, scm_api], type: "shell", name: "configure-system", inline: <<-SHELL
     scm_uri=$1
     scm_api=$2
-    grepexpr='(?<="tag_name":).*?[^\\\\](?=",)'
-    _version=$(curl -s "${scm_api}/latest" | grep -oP "${grepexpr}")
-    version="${_version#*\\"}"
+    version="#{ENV['DEVBOX_WITH_VERSION']}"
+    if [[ -z "${version}" ]]; then
+      grepexpr='(?<="tag_name":).*?[^\\\\](?=",)'
+      _version=$(curl -s "${scm_api}/latest" | grep -oP "${grepexpr}")
+      version="${_version#*\\"}"
+    else
+      echo "Overriding latest version";
+    fi
     configdir="devbox-${version}"
     [[ -d "/tmp/system" ]] || mkdir /tmp/system
-    [[ -d "/tmp/system/${configdir}" ]] || ( echo "fetching ${version} configuration from ${scm_uri}"; \
-                                             pushd /tmp/system > /dev/null; \
-                                             curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz; \
-                                             cp --verbose "${configdir}/configuration.nix" "/etc/nixos/configuration.nix"; \
-                                             popd > /dev/null;
-                                           )
+    if [[ ! -d "/tmp/system/${configdir}" ]]; then
+      echo "fetching ${version} configuration from ${scm_uri}";
+      pushd /tmp/system > /dev/null;
+      curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
+      cp --verbose "${configdir}/configuration.nix" "/etc/nixos/configuration.nix";
+      popd > /dev/null;
+    fi
 
     nixos-rebuild switch
   SHELL
@@ -36,21 +42,27 @@ Vagrant.configure("2") do |config|
   config.vm.provision "user", args: [scm_uri, scm_api], type: "shell" , name: "configure-user", privileged: false, inline: <<-SHELL
     scm_uri=$1
     scm_api=$2
-    grepexpr='(?<="tag_name":).*?[^\\\\](?=",)'
-    _version=$(curl -s "${scm_api}/latest" | grep -oP "${grepexpr}")
-    version="${_version#*\\"}"
+    version="#{ENV['DEVBOX_WITH_VERSION']}"
+    if [[ -z "${version}" ]]; then
+      grepexpr='(?<="tag_name":).*?[^\\\\](?=",)'
+      _version=$(curl -s "${scm_api}/latest" | grep -oP "${grepexpr}")
+      version="${_version#*\\"}"
+    else
+      echo "Overriding latest version";
+    fi
     configdir="devbox-${version}"
     [[ -d "/tmp/user" ]] || mkdir /tmp/user
-    [[ -d "/tmp/user/${configdir}" ]] || ( echo "fetching ${version} configuration from ${scm_uri}"; \
-                                           pushd /tmp/user > /dev/null; \
-                                           curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz; \
-                                           cp "${configdir}/.xmobarrc" "${HOME}/.xmobarrc"; \
-                                           cp "${configdir}/.wallpaper.jpg" "${HOME}/.wallpaper.jpg"; \
-                                           mkdir -p "${HOME}/.xmonad"; \
-                                           cp "${configdir}/xmonad.hs" "${HOME}/.xmonad/xmonad.hs"; \
-					   mkdir -p "${HOME}/.config/xfce4/terminal"; \
-					   cp "${configdir}/terminalrc" "${HOME}/.config/xfce4/terminal/terminalrc"; \
-					   popd > /dev/null;
-                                         )
+    if [[ ! -d "/tmp/user/${configdir}" ]]; then
+      echo "fetching ${version} configuration from ${scm_uri}";
+      pushd /tmp/user > /dev/null;
+      curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
+      cp "${configdir}/.xmobarrc" "${HOME}/.xmobarrc";
+      cp "${configdir}/.wallpaper.jpg" "${HOME}/.wallpaper.jpg";
+      mkdir -p "${HOME}/.xmonad";
+      cp "${configdir}/xmonad.hs" "${HOME}/.xmonad/xmonad.hs";
+      mkdir -p "${HOME}/.config/xfce4/terminal";
+      cp "${configdir}/terminalrc" "${HOME}/.config/xfce4/terminal/terminalrc";
+      popd > /dev/null;
+    fi
   SHELL
 end
