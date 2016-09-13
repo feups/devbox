@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   scm_uri = "https://github.com/CIRB/devbox"
   scm_api = "https://api.github.com/repos/CIRB/devbox/releases"
 
-  config.vm.box = "nixbox-1603"
+  config.vm.box = "nixbox-1609c"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
@@ -15,7 +15,14 @@ Vagrant.configure("2") do |config|
 	vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
 
+  config.vm.provision "ssh-keys", type: "file", source: "ssh-keys", destination: "/tmp"
+
   config.vm.provision "system", args: [scm_uri, scm_api], type: "shell", name: "configure-system", inline: <<-SHELL
+    ping -c1 8.8.8.8 > /dev/null
+    if [[ $? -ne 0 ]]; then
+      echo "No internet connexion. Exit";
+      exit 1;
+    fi
     scm_uri=$1
     scm_api=$2
     version="#{ENV['DEVBOX_WITH_VERSION']}"
@@ -31,6 +38,7 @@ Vagrant.configure("2") do |config|
       pushd /tmp/system > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       cp --verbose "${configdir}/configuration.nix" "/etc/nixos/configuration.nix";
+      cp --verbose -n "${configdir}/local-configuration.nix" "/etc/nixos/local-configuration.nix"
       popd > /dev/null;
     fi
 
@@ -38,6 +46,11 @@ Vagrant.configure("2") do |config|
   SHELL
 
   config.vm.provision "user", args: [scm_uri, scm_api], type: "shell" , name: "configure-user", privileged: false, inline: <<-SHELL
+    ping -c1 8.8.8.8 > /dev/null
+    if [[ $? -ne 0 ]]; then
+      echo "No internet connexion. Exit";
+      exit 1;
+    fi
     scm_uri=$1
     scm_api=$2
     version="#{ENV['DEVBOX_WITH_VERSION']}"
@@ -52,13 +65,12 @@ Vagrant.configure("2") do |config|
       echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/user > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
-      cp "${configdir}/.xmobarrc" "${HOME}/.xmobarrc";
-      cp "${configdir}/.wallpaper.jpg" "${HOME}/.wallpaper.jpg";
-      mkdir -p "${HOME}/.xmonad";
-      cp "${configdir}/xmonad.hs" "${HOME}/.xmonad/xmonad.hs";
-      mkdir -p "${HOME}/.config/xfce4/terminal";
-      cp "${configdir}/terminalrc" "${HOME}/.config/xfce4/terminal/terminalrc";
+      pushd ${configdir} > /dev/null;
+      chmod +x ./setenv.sh
+      ./setenv.sh
+      popd > /dev/null;
       popd > /dev/null;
     fi
   SHELL
+
 end

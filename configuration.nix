@@ -4,8 +4,10 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./local-configuration.nix
     ];
 
+  boot.loader.timeout = 2;
   # Use GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -15,11 +17,15 @@
   # your boot until you press *.
   boot.initrd.checkJournalingFS = false;
 
-  nix.nixPath = [ "nixos-config=/etc/nixos/configuration.nix" "nixpkgs=http://nixos.org/channels/nixos-unstable/nixexprs.tar.xz" ];
-
   networking.enableIPv6 = false;
 
   nixpkgs.config.allowUnfree = true;
+
+  nix.extraOptions = ''
+    gc-keep-outputs = true
+    gc-keep-derivations = true
+  '';
+  nix.gc.automatic = true;
 
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -70,7 +76,6 @@
     cabal2nix
     chromium
     docker
-    eclipses.eclipse-sdk-452
     findutils
     gitFull
     gnupg
@@ -78,19 +83,23 @@
     haskellPackages.xmobar
     haskellPackages.shake
     haskellPackages.stack
+    hiera-eyaml
     htop
     iputils
     jq
+    maven
     nettools
     neovim
     netcat
     nix-repl
     nfs-utils
+    nodejs
     rsync
     parallel
     shellcheck
     silver-searcher
     tree
+    unzip
     wget
     which
     xfce.terminal
@@ -108,7 +117,7 @@
         description     = "Vagrant User";
         name            = "vagrant";
         group           = "vagrant";
-        extraGroups     = [ "users" "vboxsf" "wheel" ];
+        extraGroups     = [ "users" "vboxsf" "wheel" "docker" ];
         password        = "vagrant";
         home            = "/home/vagrant";
         createHome      = true;
@@ -149,24 +158,11 @@
     shopt -s autocd
     shopt -s histappend
 
-    function presources () {
-        puppetresources -p . -o $1 --hiera ./tests/hiera.yaml --pdbfile tests/facts.yaml ''${@:2}
-    }
-
     export HISTCONTROL=ignoreboth
 
     #. $(autojump-share)/autojump.bash
   '';
-  programs.bash.promptInit = ''
-    # Provide a nice prompt if the terminal supports it.
-    if [ "$TERM" != "dumb" -o -n "$INSIDE_EMACS" ]; then
-      PROMPT_COLOR="1;31m"
-      let $UID && PROMPT_COLOR="1;32m"
-      PS1="\n\[\033[$PROMPT_COLOR\][\u@\h:\w]\\$\[\033[0m\] "
-      if test "$TERM" = "xterm"; then
-        export PS1='\w\[\033[01;38m\]''$(__git_ps1)\[\033[00m\] → '
-      fi
-    fi
-  '';
- system.stateVersion = "16.03";
+
+  system.stateVersion = "16.09";
+
 }

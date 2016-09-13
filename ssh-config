@@ -1,0 +1,5 @@
+Host stash.cirb.lan
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+  IdentityFile ~/.ssh/cirb_rsa
+  PreferredAuthentications publickey
