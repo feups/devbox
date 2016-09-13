@@ -71,7 +71,7 @@
     cabal2nix
     chromium
     docker
-    eclipses.eclipse-sdk-452
+    # eclipses.eclipse-sdk-452
     findutils
     gitFull
     gnupg
