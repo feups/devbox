@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
     ];
 
+  boot.loader.timeout = 2;
   # Use GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -44,8 +45,8 @@
     displayManager = {
       lightdm = {
         enable = true;
-        autoLogin.user= "vagrant";
-        autoLogin.enable= true;
+        #autoLogin.user= "vagrant";
+        #autoLogin.enable= true;
       };
       sessionCommands = ''
         ${pkgs.xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr
