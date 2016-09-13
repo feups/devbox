@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
     ];
 
+  boot.loader.timeout = 2;
   # Use GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -14,8 +15,6 @@
   # remove the fsck that runs at startup. It will always fail to run, stopping
   # your boot until you press *.
   boot.initrd.checkJournalingFS = false;
-
-  nix.nixPath = [ "nixos-config=/etc/nixos/configuration.nix" "nixpkgs=http://nixos.org/channels/nixos-unstable/nixexprs.tar.xz" ];
 
   networking.enableIPv6 = false;
 
@@ -168,5 +167,5 @@
       fi
     fi
   '';
- system.stateVersion = "16.03";
+ system.stateVersion = "16.09";
 }
