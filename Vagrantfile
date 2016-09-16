@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   scm_uri = "https://github.com/CIRB/devbox"
   scm_api = "https://api.github.com/repos/CIRB/devbox/releases"
 
-  config.vm.box = "nixbox-1603"
+  config.vm.box = "nixbox-1609c"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
@@ -16,6 +16,11 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "system", args: [scm_uri, scm_api], type: "shell", name: "configure-system", inline: <<-SHELL
+    ping -c1 8.8.8.8 > /dev/null
+    if [[ $? -ne 0 ]]; then
+      echo "No internet connexion. Exit";
+      exit 1;
+    fi
     scm_uri=$1
     scm_api=$2
     version="#{ENV['DEVBOX_WITH_VERSION']}"
@@ -38,6 +43,11 @@ Vagrant.configure("2") do |config|
   SHELL
 
   config.vm.provision "user", args: [scm_uri, scm_api], type: "shell" , name: "configure-user", privileged: false, inline: <<-SHELL
+    ping -c1 8.8.8.8 > /dev/null
+    if [[ $? -ne 0 ]]; then
+      echo "No internet connexion. Exit";
+      exit 1;
+    fi
     scm_uri=$1
     scm_api=$2
     version="#{ENV['DEVBOX_WITH_VERSION']}"
