@@ -43,8 +43,8 @@
     displayManager = {
       lightdm = {
         enable = true;
-        autoLogin.user= "vagrant";
-        autoLogin.enable= true;
+        # autoLogin.user= "vagrant";
+        # autoLogin.enable= true;
       };
       sessionCommands = ''
         ${pkgs.xlibs.xsetroot}/bin/xsetroot -cursor_name left_ptr
@@ -77,6 +77,7 @@
     haskellPackages.xmobar
     haskellPackages.shake
     haskellPackages.stack
+    haskellPackages.shellCheck
     htop
     iputils
     jq
@@ -87,13 +88,12 @@
     nfs-utils
     rsync
     parallel
-    shellcheck
     silver-searcher
     tree
     wget
     which
     xfce.terminal
-    zeal
+    # zeal
     zip
   ];
 
