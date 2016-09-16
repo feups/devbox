@@ -158,16 +158,7 @@
 
     #. $(autojump-share)/autojump.bash
   '';
-  programs.bash.promptInit = ''
-    # Provide a nice prompt if the terminal supports it.
-    if [ "$TERM" != "dumb" -o -n "$INSIDE_EMACS" ]; then
-      PROMPT_COLOR="1;31m"
-      let $UID && PROMPT_COLOR="1;32m"
-      PS1="\n\[\033[$PROMPT_COLOR\][\u@\h:\w]\\$\[\033[0m\] "
-      if test "$TERM" = "xterm"; then
-        export PS1='\w\[\033[01;38m\]''$(__git_ps1)\[\033[00m\] → '
-      fi
-    fi
-  '';
- system.stateVersion = "16.09";
+
+  system.stateVersion = "16.09";
+
 }

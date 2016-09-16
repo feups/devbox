@@ -63,11 +63,10 @@ Vagrant.configure("2") do |config|
       pushd /tmp/user > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       cp "${configdir}/.xmobarrc" "${HOME}/.xmobarrc";
+      cp "${configdir}/.bashrc" "${HOME}/.bashrc";
       cp "${configdir}/.wallpaper.jpg" "${HOME}/.wallpaper.jpg";
-      mkdir -p "${HOME}/.xmonad";
-      cp "${configdir}/xmonad.hs" "${HOME}/.xmonad/xmonad.hs";
-      mkdir -p "${HOME}/.config/xfce4/terminal";
-      cp "${configdir}/terminalrc" "${HOME}/.config/xfce4/terminal/terminalrc";
+      install -Dm644 "${configdir}/xmonad.hs" "${HOME}/.xmonad/xmonad.hs";
+      install -Dm644 "${configdir}/terminalrc" "${HOME}/.config/xfce4/terminal/terminalrc";
       popd > /dev/null;
     fi
   SHELL
