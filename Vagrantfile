@@ -67,7 +67,10 @@ Vagrant.configure("2") do |config|
       cp "${configdir}/.wallpaper.jpg" "${HOME}/.wallpaper.jpg";
       install -Dm644 "${configdir}/xmonad.hs" "${HOME}/.xmonad/xmonad.hs";
       install -Dm644 "${configdir}/terminalrc" "${HOME}/.config/xfce4/terminal/terminalrc";
+      install -Dm644 "${configdir}/config.nix" "${HOME}/.nixpkgs/config.nix";
+      cp -r "${configdir}/pkgs" "${HOME}/.nixpkgs/"	  
       popd > /dev/null;
     fi
   SHELL
+
 end
