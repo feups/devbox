@@ -62,13 +62,9 @@ Vagrant.configure("2") do |config|
       echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/user > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
-      cp "${configdir}/.xmobarrc" "${HOME}/.xmobarrc";
-      cp "${configdir}/.bashrc" "${HOME}/.bashrc";
-      cp "${configdir}/.wallpaper.jpg" "${HOME}/.wallpaper.jpg";
-      install -Dm644 "${configdir}/xmonad.hs" "${HOME}/.xmonad/xmonad.hs";
-      install -Dm644 "${configdir}/terminalrc" "${HOME}/.config/xfce4/terminal/terminalrc";
-      install -Dm644 "${configdir}/config.nix" "${HOME}/.nixpkgs/config.nix";
-      cp -r "${configdir}/pkgs" "${HOME}/.nixpkgs/"	  
+      pushd ${configdir}
+      ./setenv.sh
+      popd > /dev/null;
       popd > /dev/null;
     fi
   SHELL
