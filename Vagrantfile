@@ -63,6 +63,7 @@ Vagrant.configure("2") do |config|
       pushd /tmp/user > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       pushd ${configdir}
+      chmod +x ./setenv.sh
       ./setenv.sh
       popd > /dev/null;
       popd > /dev/null;
