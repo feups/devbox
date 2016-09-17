@@ -12,5 +12,6 @@ install -Dm644 terminalrc "${HOME}/.config/xfce4/terminal/terminalrc";
 install -Dm644 config.nix "${HOME}/.nixpkgs/config.nix";
 cp -r pkgs "${HOME}/.nixpkgs/"
 
-rsync --remove-source-files --chmod=ugo-x /tmp/ssh-keys/*.pub /home/vagrant/.ssh/
-rsync --remove-source-files --chmod=go-rw /tmp/ssh-keys/+([^.]) /home/vagrant/.ssh/
+private_keys=$(find /tmp/ssh-keys -maxdepth 1 -type f ! -name "*.*" )
+rsync --remove-source-files --chmod=ugo-x /tmp/ssh-keys/*.pub "${HOME}/.ssh/"
+rsync --chmod=go-rw  "$private_keys" "${HOME}/.ssh/"
