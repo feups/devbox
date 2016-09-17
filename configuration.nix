@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./local-configuration.nix
     ];
 
   boot.loader.timeout = 2;
