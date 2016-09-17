@@ -21,6 +21,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  nix.extraOptions = ''
+    gc-keep-outputs = true
+    gc-keep-derivations = true
+  '';
+
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "be-latin1";
@@ -93,6 +98,7 @@
     shellcheck
     silver-searcher
     tree
+    unzip
     wget
     which
     xfce.terminal
@@ -110,7 +116,7 @@
         description     = "Vagrant User";
         name            = "vagrant";
         group           = "vagrant";
-        extraGroups     = [ "users" "vboxsf" "wheel" ];
+        extraGroups     = [ "users" "vboxsf" "wheel" "docker" ];
         password        = "vagrant";
         home            = "/home/vagrant";
         createHome      = true;
