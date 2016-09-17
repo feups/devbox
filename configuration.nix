@@ -75,7 +75,6 @@
     cabal2nix
     chromium
     docker
-    eclipses.eclipse-sdk-452
     findutils
     gitFull
     gnupg
@@ -83,6 +82,7 @@
     haskellPackages.xmobar
     haskellPackages.shake
     haskellPackages.stack
+    hiera-eyaml
     htop
     iputils
     jq

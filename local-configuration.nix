@@ -3,6 +3,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    geany
+    eclipses.eclipse-sdk-452
+    # geany
   ];
 }
