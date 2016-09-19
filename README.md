@@ -26,10 +26,11 @@ You can add some specific configuration by editing `/etc/nixos/local-configurati
 
 ## Import your ssh private/public keys
 
-Before provisioning, create a directory `ssh-keys` on the host (where the `Vagrantfile` sits) and place all your keys in it. Public keys should have the extension `.pub` while private keys have no extension. For instance:
+Before provisioning, create a directory `ssh-keys` on the host (where the `Vagrantfile` sits) and place all your keys in it.
 
-```
-ssh-keys/cirb_rsa
-ssh-keys/cirb_rsa.pub
-```
+Please note that:
+
+* public keys should have the extension `.pub` while private keys have no extension.
+* your Bitbucket key pair should be named `cirb_rsa` and `cirb_rsa.pub` respectively.
+
 These keys will be automatically placed in the `.ssh` folder of the vagrant user on the guest OS with the correct file permissions.
