@@ -25,6 +25,7 @@
     gc-keep-outputs = true
     gc-keep-derivations = true
   '';
+  nix.gc.automatic = true;
 
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -156,10 +157,6 @@
   programs.bash.interactiveShellInit = ''
     shopt -s autocd
     shopt -s histappend
-
-    function presources () {
-        puppetresources -p . -o $1 --hiera ./tests/hiera.yaml --pdbfile tests/facts.yaml ''${@:2}
-    }
 
     export HISTCONTROL=ignoreboth
 
