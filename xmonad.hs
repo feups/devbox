@@ -32,6 +32,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch editor
     , ((modm .|. shiftMask, xK_comma ), spawn "vim")
 
+    -- resize wallpaper
+    , ((modm .|. shiftMask, xK_i), spawn "feh --bg-scale ${HOME}/.wallpaper.jpg" )
+
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
