@@ -37,8 +37,8 @@ Vagrant.configure("2") do |config|
       echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/system > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
-      cp --verbose "${configdir}/configuration.nix" "/etc/nixos/configuration.nix";
-      cp --verbose -n "${configdir}/local-configuration.nix" "/etc/nixos/local-configuration.nix"
+      cp --verbose "${configdir}/system/configuration.nix" "/etc/nixos/configuration.nix";
+      cp --verbose -n "${configdir}/system/local-configuration.nix" "/etc/nixos/local-configuration.nix"
       popd > /dev/null;
     fi
 
@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
       echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/user > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
-      pushd ${configdir} > /dev/null;
+      pushd ${configdir}/user > /dev/null;
       chmod +x ./setenv.sh
       ./setenv.sh
       popd > /dev/null;
