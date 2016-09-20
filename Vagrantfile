@@ -42,7 +42,8 @@ Vagrant.configure("2") do |config|
       popd > /dev/null;
     fi
 
-    nixos-rebuild switch
+    echo "Updating the configuration. Hold on. It might take a while.";
+    nixos-rebuild switch > /dev/null;
   SHELL
 
   config.vm.provision "user", args: [scm_uri, scm_api], type: "shell" , name: "configure-user", privileged: false, inline: <<-SHELL
