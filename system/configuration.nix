@@ -98,6 +98,8 @@
     parallel
     shellcheck
     silver-searcher
+    stow
+    tmux
     tree
     unzip
     wget
