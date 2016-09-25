@@ -5,7 +5,7 @@ cicd_dir="${HOME}/projects/cicd"
 echo "Configuring user"
 
 echo "Installing dotfiles"
-nix-build dotfiles.src -A src -o dotfiles
+nix-build dotfiles.nix -o dotfiles
 stow dotfiles -v -t "$HOME"
 
 echo "Installing common files"

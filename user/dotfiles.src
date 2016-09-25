@@ -1,9 +1,0 @@
-with import <nixpkgs> {};
-{
-  src = fetchFromGitHub {
-      owner = "CIRB";
-      repo = "devbox-dotfiles";
-      rev = "801f66f3c7d657f5648963c60e89743d85133b1a" ;
-      sha256 = "1w4vaqp21dmdd1m5akmzq4c3alabyn0mp94s6lqzzp1qpla0sdx0" ;
-  };
-}
