@@ -88,6 +88,7 @@
     iputils
     jq
     maven
+    mr
     nettools
     neovim
     netcat
@@ -98,10 +99,10 @@
     parallel
     shellcheck
     silver-searcher
-    stow
     tmux
     tree
     unzip
+    vcsh
     wget
     which
     xfce.terminal
