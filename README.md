@@ -8,6 +8,27 @@ vagrant box add devbox-1609 packer_vbox-nixos_1609.box
 vagrant up
 ```
 
+### Windows manager
+
+The devbox comes with a [tiling windows manager](https://en.wikipedia.org/wiki/Tiling_window_manager) called [xmonad](http://xmonad.org/). Such a minimal approach has been chosen for 3 reasons:
+
+* Efficiency: the box needs to consume as minimum CPU/Mem resources as possible
+* Simplicity: the window manager is basic but yet quite flexible
+* Practicality: the desktop is distraction free.
+
+#### Minimal cheat sheet
+
+| Command | Description |
+| --------- | ------|
+| `<Super> p` | Open Menu |
+| `<Super> <Shift> Enter` | New terminal |
+| `<Super> Tab` | Change between horizontal, vertical and stack layout |
+| `<Super> <Shift> c` | Close (kill) current window |
+| `<Super> m`, `<Super> h` | Resize windows |
+
+
+PS: another good candidate as a tiling manager would be [i3](https://i3wm.org/). If you like it better, please contact the CICD team for a vote in that direction.
+
 ## Provision
 
 The provisioning is done automatically the first time `vagrant up` is executed. You can provision again later on by using `vagrant provision`. This is useful to check for a configuration update.
