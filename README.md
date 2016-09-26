@@ -4,7 +4,7 @@
 ## Usage
 
 ```
-vagrant box add devbox-1609 packer_vbox-nixos_1609.box
+vagrant box add devbox-1609 devbox
 vagrant up
 ```
 

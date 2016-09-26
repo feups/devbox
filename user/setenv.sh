@@ -1,7 +1,5 @@
 #! /usr/bin/env bash
 
-#### FUNC ####
-
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
 function install_dotfiles {
     echo "Installing dotfiles"
@@ -9,7 +7,7 @@ function install_dotfiles {
     stow dotfiles -v -t "$HOME"
 }
 
-# Shared common files that will be overridden when provisioning a new configuration 
+# Shared common files that will be overridden when provisioning a new configuration
 function install_commonfiles {
     echo "Installing common files"
 
@@ -91,4 +89,3 @@ install_commonfiles
 install_pk_keys
 install_eclipse_plugins
 install_projects
-

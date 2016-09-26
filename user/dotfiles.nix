@@ -8,8 +8,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
       owner = "CIRB";
       repo = "devbox-dotfiles";
-      rev = "801f66f3c7d657f5648963c60e89743d85133b1a" ;
-      sha256 = "1w4vaqp21dmdd1m5akmzq4c3alabyn0mp94s6lqzzp1qpla0sdx0" ;
+      rev = "4caed86088591940e58add1273d2ccd64add1ef0";
+      sha256 = "1j5mb7zwcx842k3b1m3rxjc636q73q44rwm3959xn4psr8193i9c";
   };
   buildInput = [ xmonadEnv ];
   installPhase = ''
