@@ -1,15 +1,6 @@
 #! /usr/bin/env bash
 
-echo "Configuring user"
-
-install_dotfiles
-install_commonfiles
-install_pk_keys
-install_eclipse_plugins
-install_projects
-
-
-### FUNC
+#### FUNC ####
 
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
 function install_dotfiles {
@@ -91,3 +82,13 @@ function install_eclipse_plugins {
             -roaming \
             -nosplash
 }
+
+#### Main ####
+echo "Configuring user"
+
+install_dotfiles
+install_commonfiles
+install_pk_keys
+install_eclipse_plugins
+install_projects
+
