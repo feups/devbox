@@ -5,6 +5,7 @@ function install_dotfiles {
     echo "Installing dotfiles"
     if ! [[ -d $HOME/.mrconfig ]]; then
         vcsh clone git://github.com/CIRB/vcsh_mr_template.git mr
+        ln -s "${HOME}/.config/mr/available.d/dotfiles.vcsh" "${HOME}/.config/mr/config.d/"
     fi
     mr -d "$HOME" up
 }
@@ -45,46 +46,48 @@ function install_projects {
 }
 
 function install_eclipse_plugins {
-    echo "Installing eclipse plugins"
+    if ! [[ -d "${HOME}/.eclipse/org.eclipse.platform_4.5.2/p2" ]]; then
+        echo "Installing eclipse plugins"
 
-    # puppet
-    eclipse -application org.eclipse.equinox.p2.director \
-            -repository http://geppetto-updates.puppetlabs.com/4.x \
-            -installIU com.puppetlabs.geppetto.feature.group \
-            -tag InitialState \
-            -profile SDKProfile \
-            -profileProperties org.eclipse.update.install.features=true \
-            -p2.os linux \
-            -p2.ws gtk \
-            -p2.arch x86 \
-            -roaming \
-            -nosplash
+        # puppet
+        eclipse -application org.eclipse.equinox.p2.director \
+                -repository http://geppetto-updates.puppetlabs.com/4.x \
+                -installIU com.puppetlabs.geppetto.feature.group \
+                -tag InitialState \
+                -profile SDKProfile \
+                -profileProperties org.eclipse.update.install.features=true \
+                -p2.os linux \
+                -p2.ws gtk \
+                -p2.arch x86 \
+                -roaming \
+                -nosplash
 
-    # maven
-    eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.m2e.feature.feature.group \
-            -tag InitialState \
-            -profile SDKProfile \
-            -profileProperties org.eclipse.update.install.features=true \
-            -p2.os linux \
-            -p2.ws gtk \
-            -p2.arch x86 \
-            -roaming \
-            -nosplash
+        # maven
+        eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.m2e.feature.feature.group \
+                -tag InitialState \
+                -profile SDKProfile \
+                -profileProperties org.eclipse.update.install.features=true \
+                -p2.os linux \
+                -p2.ws gtk \
+                -p2.arch x86 \
+                -roaming \
+                -nosplash
 
-    # git
-    eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.egit.feature.group \
-            -tag InitialState \
-            -profile SDKProfile \
-            -profileProperties org.eclipse.update.install.features=true \
-            -p2.os linux \
-            -p2.ws gtk \
-            -p2.arch x86 \
-            -roaming \
-            -nosplash
+        # git
+        eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.egit.feature.group \
+                -tag InitialState \
+                -profile SDKProfile \
+                -profileProperties org.eclipse.update.install.features=true \
+                -p2.os linux \
+                -p2.ws gtk \
+                -p2.arch x86 \
+                -roaming \
+                -nosplash
+    fi
 }
 
-#### Main ####
-echo "Configuring user"
+####     Main ####
+echo     "Configuring user"
 
 install_dotfiles
 install_commonfiles
