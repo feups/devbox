@@ -41,10 +41,6 @@ vagrant provision --provision-with user
 vagrant provision --provision-with ssh-keys
 ```
 
-## Customization
-
-You can add some specific configuration by editing `/etc/nixos/local-configuration.nix`. This file is never overridden by a call for provisioning. For instance if you want to install the `geany` package, just uncomment the adhoc line.
-
 ## Import your ssh private/public keys
 
 Before provisioning, create a directory `ssh-keys` on the host (where the `Vagrantfile` sits) and place all your keys in it.
@@ -55,3 +51,15 @@ Please note that:
 * your Bitbucket key pair should be named `cirb_rsa` and `cirb_rsa.pub` respectively.
 
 These keys will be automatically placed in the `.ssh` folder of the vagrant user on the guest OS with the correct file permissions.
+
+## Customization
+
+### System
+
+You can add some specific configuration by editing `/etc/nixos/local-configuration.nix`. This file is never overridden by a call for provisioning. For instance if you want to install the `geany` package, just uncomment the adhoc line.
+
+### User
+
+You can add any `dotfiles` repositories including your own personal ones thanks to [vcsh/myrepos](https://github.com/RichiH/vcsh). For instance you might easily add/share some `vim`, `tmux` or `zsh` configurations.
+
+[Look here](https://github.com/RichiH/vcsh/blob/master/doc/README.md#from-zero-to-vcsh) for more information and have a look at the [mr CIRB template](https://github.com/CIRB/vcsh_mr_template).
