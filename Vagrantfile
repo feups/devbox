@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   scm_uri = "https://github.com/CIRB/devbox"
   scm_api = "https://api.github.com/repos/CIRB/devbox/releases"
 
-  config.vm.box = "nixbox-1609c"
+  config.vm.box = "devbox-0.7-pre"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
     fi
 
     echo "Updating the configuration. Hold on. It might take a while.";
-    nixos-rebuild switch --upgrade > /dev/null;
+    nixos-rebuild switch --upgrade > /dev/null 2>&1;
   SHELL
 
   config.vm.provision "user", args: [scm_uri, scm_api], type: "shell" , name: "configure-user", privileged: false, inline: <<-SHELL
