@@ -21,6 +21,7 @@ In the host, pick a folder of your choice (where the `Vagrantfile` will sit). In
 ```
 vagrant box add devbox http://repo.irisnet.be/boxes/devbox.box
 vagrant init devbox && vagrant up
+vagrant reload
 ```
 
 ## Usage
@@ -95,3 +96,34 @@ You can add some specific configuration by editing `/etc/nixos/local-configurati
 You can add any `dotfiles` repositories including your own personal ones thanks to [vcsh/myrepos](https://github.com/RichiH/vcsh). For instance you might easily add/share some `vim`, `tmux` or `zsh` configurations.
 
 [Look here](https://github.com/RichiH/vcsh/blob/master/doc/README.md#from-zero-to-vcsh) for more information and have a look at the [mr CIRB template](https://github.com/CIRB/vcsh_mr_template).
+
+
+## How is the box generated ?
+
+The box is generated using packer and the source files from [here](https://github.com/zimbatm/nixbox):
+
+```
+packer.exe build nixos-x86_64.json
+vagrant box add devbox-x.x-pre packer_virtualbox-iso_virtualbox.box
+```
+The size of the 'pre box' is ~ 300M
+
+The box is then repackaged to a full vm:
+
+```
+git clone git@github.com:CIRB/devbox.git
+cd devbox
+vagrant up --no-provision
+vagrant provision --provision-with system
+vagrant reload
+vagrant package --output devbox-0.x --vagrantfile Vagrantfile
+```
+
+The size of the repackaged vagrant box is about ~2G.
+
+
+## TODOs
+
+- [ ] Populate ssh config
+- [ ] Use `mr` to fetch projects sources
+- [ ] Add salt in projects
