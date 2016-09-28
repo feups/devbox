@@ -77,6 +77,7 @@
     chromium
     docker
     findutils
+    firefox
     gitFull
     gnupg
     gnumake
