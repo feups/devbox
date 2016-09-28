@@ -26,9 +26,9 @@ function install_pk_keys {
         exit 1
     fi
     echo "Installing PK keys"
-    rsync -v --chmod=644 /vagrant/ssh-keys/*.pub "${HOME}/.ssh/"
+    rsync --chmod=644 /vagrant/ssh-keys/*.pub "${HOME}/.ssh/"
     for f in $(find /vagrant/ssh-keys -maxdepth 1 -type f ! -name "*.*" ); do
-        rsync -v --chmod=600  "$private_keys" "${HOME}/.ssh/"
+        rsync --chmod=600  "$private_keys" "${HOME}/.ssh/"
     done
 }
 
