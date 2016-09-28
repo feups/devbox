@@ -3,3 +3,9 @@ Host stash.cirb.lan
   UserKnownHostsFile=/dev/null
   IdentityFile ~/.ssh/cirb_rsa
   PreferredAuthentications publickey
+
+Host github.com
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+  IdentityFile ~/.ssh/cirb_github_rsa
+  PreferredAuthentications publickey

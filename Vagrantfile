@@ -15,8 +15,6 @@ Vagrant.configure("2") do |config|
 	vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
 
-  config.vm.provision "ssh-keys", type: "file", source: "ssh-keys", destination: "/tmp"
-
   config.vm.provision "system", args: [scm_uri, scm_api], type: "shell", name: "configure-system", inline: <<-SHELL
     ping -c1 8.8.8.8 > /dev/null
     if [[ $? -ne 0 ]]; then

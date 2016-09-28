@@ -21,11 +21,15 @@ function install_commonfiles {
 }
 
 function install_pk_keys {
+    if ! [[ -d /vagrant/ssh-keys ]]; then
+        echo "No ssh-keys directory found. Will abort user provisioning."
+        exit 1
+    fi
     echo "Installing PK keys"
-    cp ssh-config "${HOME}/.ssh/config";
-    private_keys=$(find /tmp/ssh-keys -maxdepth 1 -type f ! -name "*.*" )
-    rsync --remove-source-files --chmod=ugo-x /tmp/ssh-keys/*.pub "${HOME}/.ssh/"
-    rsync --chmod=go-rw  "$private_keys" "${HOME}/.ssh/"
+    rsync -v --chmod=644 /vagrant/ssh-keys/*.pub "${HOME}/.ssh/"
+    for f in $(find /vagrant/ssh-keys -maxdepth 1 -type f ! -name "*.*" ); do
+        rsync -v --chmod=600  "$private_keys" "${HOME}/.ssh/"
+    done
 }
 
 function install_projects {
@@ -89,8 +93,8 @@ function install_eclipse_plugins {
 ####     Main ####
 echo     "Configuring user"
 
+install_pk_keys
 install_dotfiles
 install_commonfiles
-install_pk_keys
 install_eclipse_plugins
 install_projects

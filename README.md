@@ -7,7 +7,7 @@
 - Vagrant 1.8.x
 
 
-## Quick start
+## Quick first time setup
 
 ### ssh keys
 
@@ -15,8 +15,11 @@ In the host, pick a folder of your choice (where the `Vagrantfile` will sit). In
 
 1. create a directory `ssh-keys`.
 2. copy your `Bitbucket` key pair, rename them 'cirb_rsa' and 'cirb_rsa.pub' respectively if the filename differs.
+3. copy your `Github` key pair, rename them 'cirb_github_rsa' and 'cirb_github_rsa.pub'. If you use the same key pair, copy the previous pair and rename accordingly.
 
 ### box import
+
+Open a terminal in the picked folder and type:
 
 ```
 vagrant box add devbox http://repo.irisnet.be/boxes/devbox.box
@@ -39,12 +42,11 @@ vagrant provision
 
 The provisioning is done automatically the first time `vagrant up` is executed. You can provision again later on by using `vagrant provision`. This is useful to check for a configuration update.
 
-Provisioning is separated into three steps: `system` to configure the system, `user` to configure the vagrant user and `ssh-keys` to push ssl keys. You can selectively ask for provisioning using:
+Provisioning is separated into two steps: `system` to configure the system and `user` to configure the vagrant user. You can selectively ask for provisioning using:
 
 ```
 vagrant provision --provision-with system
 vagrant provision --provision-with user
-vagrant provision --provision-with ssh-keys
 ```
 
 ### operating system
@@ -70,7 +72,7 @@ The devbox comes with a [tiling windows manager](https://en.wikipedia.org/wiki/T
 | Command | Description |
 | --------- | ------|
 | `<Super> p` | Open Menu |
-| `<Super> <Shift> Enter` | New terminal |
+| `<Super> t` | New terminal |
 | `<Super> Tab` | Change between horizontal, vertical and stack layout |
 | `<Super> <Shift> c` | Close (kill) current window |
 | `<Super> m`, `<Super> h` | Resize windows |
