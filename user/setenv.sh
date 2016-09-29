@@ -3,7 +3,7 @@
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
 function install_dotfiles {
     echo "Installing dotfiles"
-    if ! [[ -d $HOME/.mrconfig ]]; then
+    if ! [[ -f $HOME/.mrconfig ]]; then
         vcsh clone git://github.com/CIRB/vcsh_mr_template.git mr
     fi
     mr -d "$HOME" up
