@@ -5,7 +5,6 @@ function install_dotfiles {
     echo "Installing dotfiles"
     if ! [[ -d $HOME/.mrconfig ]]; then
         vcsh clone git://github.com/CIRB/vcsh_mr_template.git mr
-        ln -s "${HOME}/.config/mr/available.d/dotfiles.vcsh" "${HOME}/.config/mr/config.d/"
     fi
     mr -d "$HOME" up
 }
