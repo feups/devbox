@@ -56,7 +56,7 @@ The devbox is based on [NixOS](https://nixos.org/) version 16.09. NixOS is a Lin
 To clean-up the store (whenever the disk usage is too high) use:
 
 ```
-sudo nix-collect-garbage -d
+→ sudo nix-collect-garbage -d
 ```
 
 ### windows manager
@@ -93,12 +93,27 @@ The first time, the machine is provisioned a folder `~/projects/cicd` is created
 
 You can add some specific configuration by editing `/etc/nixos/local-configuration.nix`. This file is never overridden by a call for provisioning. For instance if you want to install the `geany` package, just uncomment the adhoc line.
 
+After changing the `local-configuration.nix` file, rebuild `nixos` by using this command line:
+
+```
+→ sudo nixos-rebuild switch
+```
+
 ### user
+
+### dotfiles
 
 You can add any `dotfiles` repositories including your own personal ones thanks to [vcsh/myrepos](https://github.com/RichiH/vcsh). For instance you might easily add/share some `vim`, `tmux` or `zsh` configurations.
 
 [Look here](https://github.com/RichiH/vcsh/blob/master/doc/README.md#from-zero-to-vcsh) for more information and have a look at the [mr CIRB template](https://github.com/CIRB/vcsh_mr_template).
 
+### local packages
+
+If you need a package in 'user space' (and you are not interested in sharing such configuration), you might prefer the more imperative approach:
+
+```
+→ nix-env -i geany
+```
 
 ## How is the box generated ?
 
