@@ -98,6 +98,7 @@
     nodejs
     rsync
     parallel
+    python
     shellcheck
     silver-searcher
     tmux
