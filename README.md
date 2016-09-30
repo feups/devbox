@@ -101,13 +101,27 @@ After changing the `local-configuration.nix` file, rebuild `nixos` by using this
 
 ### user
 
-### dotfiles
+#### dotfiles
 
 You can add any `dotfiles` repositories including your own personal ones thanks to [vcsh/myrepos](https://github.com/RichiH/vcsh). For instance you might easily add/share some `vim`, `tmux` or `zsh` configurations.
 
-[Look here](https://github.com/RichiH/vcsh/blob/master/doc/README.md#from-zero-to-vcsh) for more information and have a look at the [mr CIRB template](https://github.com/CIRB/vcsh_mr_template).
+To share simple dotfiles configuration, for instance let say you want to share a default `.zshrc` file for the devbox, you can simply add the file to the [CIRB dotfiles repositry](https://github.com/CIRB/devbox-dotfiles). The file is now part of the default CIRB dotfiles source repository and will be pushed on the devbox at the next provisioning.
 
-### local packages
+If you want to share a non trivial, external or optional configuration, you can use or create a specific source repository for it and register the repository [here](https://github.com/CIRB/vcsh_mr_template/tree/master/.config/mr/available.d). If you want the configuration to be active by default, you then add a link to it in the SCM, just like [this one](https://github.com/CIRB/vcsh_mr_template/blob/master/.config/mr/config.d/dotfiles.vcsh). On the other hand, if you want it to be inactive by default ([spacemacs](https://github.com/CIRB/vcsh_mr_template/blob/master/.config/mr/available.d/spacemacs.mr) is one example), you would ask the interested users to make the link themselves on their box.
+
+Eventually there is a third option. Some of your configurations are personal and there is no need for them to be shared inside the CIRB organization. You normally won't need that option but it is there for flexibility sake. 3 steps are required:
+
+1. Fork [mr CIRB template](https://github.com/CIRB/vcsh_mr_template)
+2. Change the [mr pointer](https://github.com/CIRB/vcsh_mr_template/blob/master/.config/mr/available.d/mr.vcsh#L2) to it.
+3. Change the `mr` pointer on your local box. As an example, you might follow this command line:
+
+```
+→ vcsh mr remote set-url origin git://github.com/PierreR/vcsh_mr_template.git
+```
+
+For more information about `vcsh`, [Look here](https://github.com/RichiH/vcsh/blob/master/doc/README.md#from-zero-to-vcsh).
+
+#### local packages
 
 If you need a package in 'user space' (and you are not interested in sharing such configuration), you might prefer the more imperative approach:
 
