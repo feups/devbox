@@ -20,6 +20,7 @@ function install_commonfiles {
 }
 
 function install_pk_keys {
+    cp ssh-config "${HOME}/.ssh/config";
     if ! [[ -d /vagrant/ssh-keys ]]; then
         echo "No ssh-keys directory found. Will abort user provisioning."
         exit 1
