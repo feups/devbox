@@ -20,10 +20,14 @@ function install_commonfiles {
 }
 
 function install_pk_keys {
-    cp ssh-config "${HOME}/.ssh/config";
     if ! [[ -d /vagrant/ssh-keys ]]; then
         echo "No ssh-keys directory found. Will abort user provisioning."
         exit 1
+    fi
+    cp ssh-config "${HOME}/.ssh/config";
+    if [[ -f /vagrant/ssh-keys/config_mygithub ]]; then
+        # in case of 'vagrant destroy' re-use saved config_mygithub file
+        cp --verbose -n /vagrant/ssh-keys/config_mygithub "${HOME}/.ssh/config_mygithub"
     fi
     echo "Installing PK keys"
     rsync --chmod=644 /vagrant/ssh-keys/*.pub "${HOME}/.ssh/"

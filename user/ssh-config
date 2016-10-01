@@ -4,8 +4,13 @@ Host stash.cirb.lan
   IdentityFile ~/.ssh/cirb_rsa
   PreferredAuthentications publickey
 
-Host github.com
+Host *.github.com
   StrictHostKeyChecking no
   UserKnownHostsFile=/dev/null
-  IdentityFile ~/.ssh/cirb_github_rsa
   PreferredAuthentications publickey
+
+Host github.com
+  IdentityFile ~/.ssh/cirb_github_rsa
+
+Host mygithub.com
+  Include config_mygithub
