@@ -36,7 +36,8 @@ Vagrant.configure("2") do |config|
       pushd /tmp/system > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       cp --verbose "${configdir}/system/configuration.nix" "/etc/nixos/configuration.nix";
-      cp --verbose -n "${configdir}/system/local-configuration.nix" "/etc/nixos/local-configuration.nix"
+      localconfig_file="${configdir}/system/local-configuration.nix" && [[ -f "/vagrant/local-configuration.nix" ]]  && localconfig_file="/vagrant/local-configuration.nix"
+      cp --verbose -n "${localconfig_file}" "/etc/nixos/local-configuration.nix"
       popd > /dev/null;
     fi
 

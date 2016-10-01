@@ -91,13 +91,15 @@ The first time, the machine is provisioned a folder `~/projects/cicd` is created
 
 ### system
 
-You can add some specific configuration by editing `/etc/nixos/local-configuration.nix`. This file is never overridden by a call for provisioning. For instance if you want to install the `geany` package, just uncomment the adhoc line.
+You can add some specific configuration by editing `/etc/nixos/local-configuration.nix`. For instance if you want to install the `geany` package, just uncomment the adhoc line.
 
 After changing the `local-configuration.nix` file, rebuild `nixos` by using this command line:
 
 ```
 → sudo nixos-rebuild switch
 ```
+
+`local-configuration.nix` is never overridden by a call for provisioning. To avoid losing your changes after a `vagrant destroy`, you might want to copy the file to '/vagrant'. In fact if `local-configuration.nix` exists on the host (where the `Vagrantfile` sits), it will be used the first time a box is provisioned.
 
 ### user
 
@@ -118,6 +120,7 @@ Eventually there is a third option. Some of your configurations are personal and
 ```
 → vcsh mr remote set-url origin git://github.com/PierreR/vcsh_mr_template.git
 ```
+As a note, if you want to override the CIRB dotfiles completely you can replace [the pointer to the dotfiles](https://github.com/PierreR/vcsh_mr_template/commit/82708255d904beffe53b9587e8f553aa8804cc37).
 
 For more information about `vcsh`, [Look here](https://github.com/RichiH/vcsh/blob/master/doc/README.md#from-zero-to-vcsh).
 
