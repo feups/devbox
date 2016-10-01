@@ -14,6 +14,7 @@ mr_template_repo_url=${mr_template_repo_url:="git://github.com/CIRB/vcsh_mr_temp
 function install_dotfiles {
     echo "Installing dotfiles"
     if ! [[ -f $HOME/.mrconfig ]]; then
+        echo "About to clone ${mr_template_repo_url}"
         vcsh clone "$mr_template_repo_url"  mr
     fi
     mr -d "$HOME" up
@@ -69,6 +70,7 @@ function install_eclipse_plugins {
 
         # puppet
         if $eclipse_geppetto; then
+            echo "About to download Eclipse Geppetto. Hold on."
             eclipse -application org.eclipse.equinox.p2.director \
                     -repository http://geppetto-updates.puppetlabs.com/4.x \
                     -installIU com.puppetlabs.geppetto.feature.group \
@@ -83,6 +85,7 @@ function install_eclipse_plugins {
         fi
 
         # maven
+        echo "About to download Eclipse m2e. Hold on."
         eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.m2e.feature.feature.group \
                 -tag InitialState \
                 -profile SDKProfile \
@@ -94,6 +97,7 @@ function install_eclipse_plugins {
                 -nosplash
 
         # git
+        echo "About to download Eclipse egit. Hold on."
         eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.egit.feature.group \
                 -tag InitialState \
                 -profile SDKProfile \
