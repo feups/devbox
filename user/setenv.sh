@@ -1,10 +1,20 @@
 #! /usr/bin/env bash
 
+if [[ -f "/vagrant/params.sh" ]]; then
+    source /vagrant/params.sh
+else
+    source ./params.sh
+fi
+
+eclipse_plugins=${eclipse_plugins:=false}
+eclipse_geppetto=${eclipse_geppetto:=false}
+mr_template_repo_url=${mr_template_repo_url:="git://github.com/CIRB/vcsh_mr_template.git"}
+
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
 function install_dotfiles {
     echo "Installing dotfiles"
     if ! [[ -f $HOME/.mrconfig ]]; then
-        vcsh clone git://github.com/CIRB/vcsh_mr_template.git mr
+        vcsh clone "$mr_template_repo_url"  mr
     fi
     mr -d "$HOME" up
 }
@@ -58,17 +68,19 @@ function install_eclipse_plugins {
         echo "Installing eclipse plugins"
 
         # puppet
-        eclipse -application org.eclipse.equinox.p2.director \
-                -repository http://geppetto-updates.puppetlabs.com/4.x \
-                -installIU com.puppetlabs.geppetto.feature.group \
-                -tag InitialState \
-                -profile SDKProfile \
-                -profileProperties org.eclipse.update.install.features=true \
-                -p2.os linux \
-                -p2.ws gtk \
-                -p2.arch x86 \
-                -roaming \
-                -nosplash
+        if $eclipse_geppetto; then
+            eclipse -application org.eclipse.equinox.p2.director \
+                    -repository http://geppetto-updates.puppetlabs.com/4.x \
+                    -installIU com.puppetlabs.geppetto.feature.group \
+                    -tag InitialState \
+                    -profile SDKProfile \
+                    -profileProperties org.eclipse.update.install.features=true \
+                    -p2.os linux \
+                    -p2.ws gtk \
+                    -p2.arch x86 \
+                    -roaming \
+                    -nosplash
+        fi
 
         # maven
         eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.m2e.feature.feature.group \
@@ -100,5 +112,7 @@ echo     "Configuring user"
 install_pk_keys
 install_dotfiles
 install_commonfiles
-install_eclipse_plugins
+if $eclipse_plugins; then
+   install_eclipse_plugins
+fi
 install_projects

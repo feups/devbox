@@ -16,6 +16,7 @@ In the host, pick a folder of your choice (where the `Vagrantfile` will sit). In
 1. create a directory `ssh-keys`.
 2. copy your `Bitbucket` key pair, rename them 'cirb_rsa' and 'cirb_rsa.pub' respectively if the filename differs.
 3. copy your `Github` key pair, rename them 'cirb_github_rsa' and 'cirb_github_rsa.pub'. If you use the same key pair, copy the previous pair and rename accordingly.
+4. optionally copy the [params file](https://github.com/CIRB/devbox/blob/master/user/params.sh)
 
 ### box import
 
@@ -103,6 +104,14 @@ After changing the `local-configuration.nix` file, rebuild `nixos` by using this
 
 ### user
 
+#### params
+
+You can tweak some default settings such as "do I want to install the geppetto plugin" by modifying the `user/params.sh` file. In order to do so, copy the [file](https://github.com/CIRB/devbox/blob/master/user/params.sh) to the host where the `Vagrantfile` sits. You can easily do this by using this command line on the box:
+
+```
+→ cp /tmp/user/devbox-x.x.x/user/params.sh /vagrant/params.sh
+````
+
 #### dotfiles
 
 You can add any `dotfiles` repositories including your own personal ones thanks to [vcsh/myrepos](https://github.com/RichiH/vcsh). For instance you might easily add/share some `vim`, `tmux` or `zsh` configurations.
@@ -120,7 +129,7 @@ Eventually there is a third option. Some of your configurations are personal and
 ```
 → vcsh mr remote set-url origin git://github.com/PierreR/vcsh_mr_template.git
 ```
-As a note, if you want to override the CIRB dotfiles completely you can replace [the pointer to the dotfiles](https://github.com/PierreR/vcsh_mr_template/commit/82708255d904beffe53b9587e8f553aa8804cc37).
+As a note, if you want to override the CIRB dotfiles completely you can replace [the pointer to the dotfiles](https://github.com/PierreR/vcsh_mr_template/commit/82708255d904beffe53b9587e8f553aa8804cc37). In order to keep such a setting after a `vagrant destroy`, you would copy the `user/params.sh` to `/vagrant` and change the `mr_template_repo_url` value.
 
 For more information about `vcsh`, [Look here](https://github.com/RichiH/vcsh/blob/master/doc/README.md#from-zero-to-vcsh).
 
