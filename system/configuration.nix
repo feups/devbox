@@ -81,9 +81,8 @@
     gitFull
     gnupg
     gnumake
-    haskellPackages.xmobar
     haskellPackages.shake
-    haskellPackages.stack
+    haskellPackages.xmobar
     hiera-eyaml
     htop
     iputils
