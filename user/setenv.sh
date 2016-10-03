@@ -16,8 +16,10 @@ function install_dotfiles {
     if ! [[ -f $HOME/.mrconfig ]]; then
         echo "About to clone ${mr_template_repo_url}"
         vcsh clone "$mr_template_repo_url"  mr
+        mr -f -d "$HOME" up
+    else
+        mr -d "$HOME" up
     fi
-    mr -d "$HOME" up
 }
 
 # Shared common files that will be overridden when provisioning a new configuration
