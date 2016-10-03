@@ -30,14 +30,19 @@ Vagrant.configure("2") do |config|
       echo "Overriding latest version";
     fi
     configdir="devbox-${version}"
-    [[ -d "/tmp/system" ]] || mkdir /tmp/system
+    if ! [[ -d "/tmp/system" ]]; then
+      echo "First time provisioning"
+      mkdir /tmp/system
+      if [[ -f "/vagrant/local-configuration.nix" ]]; then
+        cp --verbose "/vagrant/local-configuration.nix" "/etc/nixos/local-configuration.nix"
+      fi
+    fi
     if [[ ! -d "/tmp/system/${configdir}" ]]; then
       echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/system > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       cp --verbose "${configdir}/system/configuration.nix" "/etc/nixos/configuration.nix";
-      localconfig_file="${configdir}/system/local-configuration.nix" && [[ -f "/vagrant/local-configuration.nix" ]]  && localconfig_file="/vagrant/local-configuration.nix"
-      cp --verbose -n "${localconfig_file}" "/etc/nixos/local-configuration.nix"
+      cp --verbose -n "${configdir}/system/local-configuration.nix" "/etc/nixos/local-configuration.nix"
       popd > /dev/null;
     fi
 
