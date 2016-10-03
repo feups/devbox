@@ -164,6 +164,11 @@ vagrant package --output devbox-0.x --vagrantfile Vagrantfile
 
 The size of the repackaged vagrant box is about ~2G.
 
+## Devbox lifecycle
+
+The versioning scheme used is semantic: major.minor.patch. 
+
+The devbox will be maintained continously with at least a major release every six months to follow the OS lifecycle (*.03 and *.09). 
 
 ## TODOs
 
