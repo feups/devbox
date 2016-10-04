@@ -3,7 +3,7 @@
 
 ## Software requirements
 
-- Virtualbox 5.1.x (5.0 should also work)
+- Virtualbox 5.1.x 
 - Vagrant 1.8.x
 
 
@@ -159,11 +159,12 @@ cd devbox
 vagrant up --no-provision
 vagrant provision --provision-with system
 vagrant reload
-rm -rf /tmp/user # on the future packaged box
-vagrant package --output devbox-0.x --vagrantfile Vagrantfile
+rm -rf /tmp/system # on the future packaged box
+vagrant package --output devbox-x.x.x --vagrantfile Vagrantfile
 ```
 
-The size of the repackaged vagrant box is about ~2G.
+The size of the repackaged vagrant box is ~ 2G.
+
 
 ## Devbox lifecycle
 
@@ -171,8 +172,14 @@ The versioning scheme used is semantic: major.minor.patch.
 
 The devbox will be maintained continously with at least a major release every six months to follow the OS lifecycle (*.03 and *.09).
 
+
+## Troubleshooting
+
+- With virtualbox `5.0.x`, for some host OS, Vagrant does not start its network interface. You will need to manually go "Machine -> Configuration -> Network" and ensure the box "Cable Connected" is checked.
+
+
 ## TODOs
 
-- [ ] Populate ssh config
-- [ ] Use `mr` to fetch projects sources
 - [ ] Add salt in projects
+- [ ] Use `mr` to fetch projects sources
+- [ ] Populate ssh config

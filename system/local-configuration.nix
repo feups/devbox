@@ -7,6 +7,7 @@
        eclipse = eclipses.eclipse-sdk-452;
        plugins = [ ];
      })
+    haskellPackages.language-puppet
     # geany
   ];
 }
