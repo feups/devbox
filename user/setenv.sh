@@ -26,8 +26,6 @@ function install_dotfiles {
 function install_commonfiles {
     echo "Installing common files"
 
-    cp .wallpaper.jpg "${HOME}/.wallpaper.jpg";
-
     install -Dm644 config.nix "${HOME}/.nixpkgs/config.nix";
     cp -r pkgs "${HOME}/.nixpkgs/"
 }
