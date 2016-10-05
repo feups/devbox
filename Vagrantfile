@@ -6,11 +6,11 @@ Vagrant.configure("2") do |config|
   scm_uri = "https://github.com/CIRB/devbox"
   scm_api = "https://api.github.com/repos/CIRB/devbox/releases"
 
-  config.vm.box = "devbox-0.7-pre"
+  config.vm.box = "devbox-0.14.1-pre"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
-    vb.memory = "2048"
+    vb.memory = "3548"
 	vb.customize ["modifyvm", :id, "--vram", "64"]
 	vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
