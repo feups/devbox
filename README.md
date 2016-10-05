@@ -3,7 +3,7 @@
 
 ## Software requirements
 
-- Virtualbox 5.1.x 
+- Virtualbox 5.1.x
 - Vagrant 1.8.x
 
 
@@ -74,9 +74,13 @@ The devbox comes with a [tiling windows manager](https://en.wikipedia.org/wiki/T
 | --------- | ------|
 | `<Super> p` | Open Menu |
 | `<Super> t` | New terminal |
-| `<Super> Tab` | Change between horizontal, vertical and stack layout |
+| `<Super> 1..9` | Go to nth desktop |
+| `<Super> <Shift> 1..9` | Switch to nth desktop  |
+| `<Super> Space` | Change between horizontal, vertical and stack layout |
+| `<Super> Tab`  | In stack layout, switch the stacked window  |
 | `<Super> <Shift> c` | Close (kill) current window |
 | `<Super> m`, `<Super> h` | Resize windows |
+| `F 1`     | Open this README in a browser |
 
 
 PS: another good candidate as a tiling manager would be [i3](https://i3wm.org/). If you like it better, please contact the CICD team for a vote in that direction.
