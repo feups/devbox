@@ -132,4 +132,4 @@ install_commonfiles
 if $eclipse_plugins; then
    install_eclipse_plugins
 fi
-install_projects
+# install_projects
