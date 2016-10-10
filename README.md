@@ -193,20 +193,16 @@ The size of the repackaged vagrant box is ~ 2G.
 
 ---
 
-## Devbox lifecycle
-
-The versioning scheme used is semantic: major.minor.patch.
-
-The devbox will be maintained continously with at least a major release every six months to follow the OS lifecycle (*.03 and *.09).
-
-
 ## Troubleshooting
 
 - With virtualbox `5.0.x`, for some host OS, Vagrant does not start its network interface. You will need to manually go "Machine -> Configuration -> Network" and ensure the box "Cable Connected" is checked.
 
 
-## TODOs
+## Devbox lifecycle
 
-- [x] Add salt in projects
-- [ ] Use `mr` to fetch projects sources
-- [ ] Populate ssh config
+Tickets and issues are handled in [Jira](http://jira.cirb.lan/browse/CICDPROJ-150)
+
+The versioning scheme used is semantic: major.minor.patch. Please look at the [Changelog](https://github.com/CIRB/devbox/blob/master/CHANGELOG.md) for more information.
+
+The devbox will be maintained continously with at least a major release every six months to follow the OS lifecycle ('*.03' and '*.09').
+
