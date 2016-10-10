@@ -52,12 +52,13 @@ function install_pk_keys {
 function install_eclipse_plugin {
     local qualified_name=$1
     local repository=${2:-"http://download.eclipse.org/releases/mars/"}
+    local install_name=${3:-"${1}.feature.group"}
     for f in ${HOME}/.eclipse/org.eclipse.platform_${eclipse_version}/plugins/${qualified_name}*; do
         if ! [ -e "$f" ]; then
             echo "About to download Eclipse ${qualified_name}. Hold on."
             eclipse -application org.eclipse.equinox.p2.director \
                     -repository "$repository" \
-                    -installIU "${qualified_name}.feature.feature.group" \
+                    -installIU "${install_name}" \
                     -tag InitialState \
                     -profile SDKProfile \
                     -profileProperties org.eclipse.update.install.features=true \
@@ -78,9 +79,9 @@ install_pk_keys
 install_dotfiles
 install_commonfiles
 if $eclipse_plugins; then
+    install_eclipse_plugin "org.eclipse.egit"
+    install_eclipse_plugin "org.eclipse.m2e" "http://download.eclipse.org/releases/mars/" "org.eclipse.m2e.feature.feature.group"
     if $eclipse_geppetto; then
         install_eclipse_plugin "com.puppetlabs.geppetto" "http://geppetto-updates.puppetlabs.com/4.x"
     fi
-    install_eclipse_plugin "org.eclipse.m2e"
-    install_eclipse_plugin "org.eclipse.egit"
 fi
