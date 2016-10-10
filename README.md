@@ -19,7 +19,7 @@
 		- [dotfiles](#dotfiles)
 		- [local packages](#local-packages)
 		- [terminal emulator](#terminal-emulator)
-- [How is the box generated ?](#how-is-the-box-generated)
+- [How is the box generated ?](#how-is-the-box-generated-)
 - [Troubleshooting](#troubleshooting)
 - [Life cycle](#life-cycle)
 
@@ -119,7 +119,7 @@ The devbox comes with a [tiling windows manager](https://en.wikipedia.org/wiki/T
 
 The first time, the machine is provisioned a folder `~/projects/cicd` is created. This directory will be empty.
 
-You can easily enable your puppet and salt repository for your `hostgroup`. For the `bos` hostgroup, you would do: 
+You can easily enable your puppet and salt repository for your `hostgroup`. For the `bos` hostgroup, you would do:
 
 ```
 .config/mr/config.d
@@ -251,4 +251,3 @@ Tickets and issues are handled in [Jira](http://jira.cirb.lan/browse/CICDPROJ-15
 The versioning scheme used is semantic: `major.minor.patch`. Please look at the [Changelog](https://github.com/CIRB/devbox/blob/master/CHANGELOG.md) for more information.
 
 The devbox will be maintained continously with at least a major release every six months to follow the OS lifecycle ('*.03' and '*.09').
-
