@@ -49,7 +49,7 @@ function install_pk_keys {
     done
 }
 
-function install_eclipse_plugins {
+function install_eclipse_plugin {
     local qualified_name=$1
     local repository=${2:-"http://download.eclipse.org/releases/mars/"}
     for f in ${HOME}/.eclipse/org.eclipse.platform_${eclipse_version}/plugins/${qualified_name}*; do
@@ -70,13 +70,6 @@ function install_eclipse_plugins {
         break
     done
 }
-function install_eclipse_plugins {
-    if $eclipse_geppetto; then
-        install_eclipse_plugins "com.puppetlabs.geppetto" "http://geppetto-updates.puppetlabs.com/4.x"
-    fi
-    install_eclipse_plugins "org.eclipse.m2e"
-    install_eclipse_plugins "org.eclipse.egit"
-}
 
 ####     Main ####
 echo     "Configuring user"
@@ -85,5 +78,9 @@ install_pk_keys
 install_dotfiles
 install_commonfiles
 if $eclipse_plugins; then
-   install_eclipse_plugins
+    if $eclipse_geppetto; then
+        install_eclipse_plugin "com.puppetlabs.geppetto" "http://geppetto-updates.puppetlabs.com/4.x"
+    fi
+    install_eclipse_plugin "org.eclipse.m2e"
+    install_eclipse_plugin "org.eclipse.egit"
 fi
