@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+eclipse_version='4.5.2'
+
 if [[ -f "/vagrant/params.sh" ]]; then
     source /vagrant/params.sh
 else
@@ -47,80 +49,33 @@ function install_pk_keys {
     done
 }
 
-function install_projects {
-
-    local cicd_dir="${HOME}/projects/cicd"
-    if ! [[ -d "$cicd_dir" ]]; then
-        ping -c1 stash.cirb.lan > /dev/null
-        if [[ $? -ne 0 ]]; then
-            echo "Cannot create cicd projects. No Bitbucket connexion."
-            exit 1;
-        fi
-        echo "Installing project files"
-        mkdir -p "$cicd_dir"
-        pushd "$cicd_dir" > /dev/null
-        git clone ssh://git@stash.cirb.lan:7999/cicd/puppet-stack-management.git puppet
-        popd
-    fi
-}
-
 function install_eclipse_plugins {
-
-    # puppet
+    local qualified_name=$1
+    local repository=${2:-"http://download.eclipse.org/releases/mars/"}
+    for f in ${HOME}/.eclipse/org.eclipse.platform_${eclipse_version}/plugins/${qualified_name}*; do
+        if ! [ -e "$f" ]; then
+            echo "About to download Eclipse ${qualified_name}. Hold on."
+            eclipse -application org.eclipse.equinox.p2.director \
+                    -repository "$repository" \
+                    -installIU "${qualified_name}.feature.feature.group" \
+                    -tag InitialState \
+                    -profile SDKProfile \
+                    -profileProperties org.eclipse.update.install.features=true \
+                    -p2.os linux \
+                    -p2.ws gtk \
+                    -p2.arch x86 \
+                    -roaming \
+                    -nosplash
+        fi
+        break
+    done
+}
+function install_eclipse_plugins {
     if $eclipse_geppetto; then
-        for f in $HOME/.eclipse/org.eclipse.platform_4.5.2/plugins/com.puppetlabs.geppetto*; do
-            if ! [ -e "$f" ]; then
-                echo "About to download Eclipse Geppetto. Hold on."
-                eclipse -application org.eclipse.equinox.p2.director \
-                        -repository http://geppetto-updates.puppetlabs.com/4.x \
-                        -installIU com.puppetlabs.geppetto.feature.group \
-                        -tag InitialState \
-                        -profile SDKProfile \
-                        -profileProperties org.eclipse.update.install.features=true \
-                        -p2.os linux \
-                        -p2.ws gtk \
-                        -p2.arch x86 \
-                        -roaming \
-                        -nosplash
-            fi
-            break
-        done
+        install_eclipse_plugins "com.puppetlabs.geppetto" "http://geppetto-updates.puppetlabs.com/4.x"
     fi
-
-    # maven
-    for f in $HOME/.eclipse/org.eclipse.platform_4.5.2/plugins/org.eclipse.m2e*; do
-        if ! [ -e "$f" ]; then
-            echo "About to download Eclipse m2e. Hold on."
-            eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.m2e.feature.feature.group \
-                    -tag InitialState \
-                    -profile SDKProfile \
-                    -profileProperties org.eclipse.update.install.features=true \
-                    -p2.os linux \
-                    -p2.ws gtk \
-                    -p2.arch x86 \
-                    -roaming \
-                    -nosplash
-        fi
-        break
-    done
-
-    # git
-    for f in $HOME/.eclipse/org.eclipse.platform_4.5.2/plugins/org.eclipse.egit*; do
-        if ! [ -e "$f" ]; then
-            echo "About to download Eclipse egit. Hold on."
-            eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -installIU org.eclipse.egit.feature.group \
-                    -tag InitialState \
-                    -profile SDKProfile \
-                    -profileProperties org.eclipse.update.install.features=true \
-                    -p2.os linux \
-                    -p2.ws gtk \
-                    -p2.arch x86 \
-                    -roaming \
-                    -nosplash
-        fi
-        break
-    done
-
+    install_eclipse_plugins "org.eclipse.m2e"
+    install_eclipse_plugins "org.eclipse.egit"
 }
 
 ####     Main ####
@@ -132,4 +87,3 @@ install_commonfiles
 if $eclipse_plugins; then
    install_eclipse_plugins
 fi
-# install_projects
