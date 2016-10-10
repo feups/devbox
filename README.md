@@ -95,9 +95,16 @@ The devbox comes with a [tiling windows manager](https://en.wikipedia.org/wiki/T
 
 ### projects
 
-The first time, the machine is provisioned a folder `~/projects/cicd` is created. This directory currently contains:
+The first time, the machine is provisioned a folder `~/projects/cicd` is created. This directory will be empty.
 
-- `puppet` with all the puppet-stack-$hostgroup projects
+You can easily enable your puppet and salt repository for your `hostgroup`. For the `bos` hostgroup, you would do: 
+
+```
+.config/mr/config.d
+ln -s ../available.d/puppet-bos.mr .
+ln -s ../available.d/salt-bos.mr .
+mr -f up
+```
 
 ---
 
