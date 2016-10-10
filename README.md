@@ -176,6 +176,17 @@ If you need a package in 'user space' (and you are not interested in sharing suc
 
 You can quickly search for packages online at [nixos.org](https://nixos.org/nixos/packages.html)
 
+
+#### terminal emulator
+
+The `devbox` uses the `urxvt` terminal for its speed and customization.
+
+| Command | Description |
+| --------- | ------|
+| `<Control> <Meta> p` | Change theme  |
+| `<Control> <Shift> up/down` | Increase/Decrease font size |
+| `<Meta> <s>` | Search console output |
+
 ---
 
 ## How is the box generated ?
@@ -209,11 +220,11 @@ The size of the repackaged vagrant box is ~ 2G.
 - With virtualbox `5.0.x`, for some host OS, Vagrant does not start its network interface. You will need to manually go "Machine -> Configuration -> Network" and ensure the box "Cable Connected" is checked.
 
 
-## Devbox lifecycle
+## Life cycle
 
 Tickets and issues are handled in [Jira](http://jira.cirb.lan/browse/CICDPROJ-150)
 
-The versioning scheme used is semantic: major.minor.patch. Please look at the [Changelog](https://github.com/CIRB/devbox/blob/master/CHANGELOG.md) for more information.
+The versioning scheme used is semantic: `major.minor.patch`. Please look at the [Changelog](https://github.com/CIRB/devbox/blob/master/CHANGELOG.md) for more information.
 
 The devbox will be maintained continously with at least a major release every six months to follow the OS lifecycle ('*.03' and '*.09').
 
