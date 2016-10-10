@@ -1,5 +1,28 @@
 # DEVBOX
 
+## Table of Contents
+
+- [DEVBOX](#)
+	- [Software requirements](#)
+	- [Quick first time setup](#)
+		- [ssh keys](#)
+		- [box import](#)
+	- [Usage](#)
+		- [vagrant](#)
+		- [operating system](#)
+		- [windows manager](#)
+			- [minimal cheat sheet](#)
+		- [projects](#)
+	- [Customization](#)
+		- [system](#)
+		- [user](#)
+			- [params](#)
+			- [dotfiles](#)
+			- [local packages](#)
+			- [terminal emulator](#)
+	- [How is the box generated ?](#)
+	- [Troubleshooting](#)
+	- [Life cycle](#)
 
 ## Software requirements
 
