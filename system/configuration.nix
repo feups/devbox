@@ -103,10 +103,10 @@
     tmux
     tree
     unzip
+    rxvt_unicode-with-plugins
     vcsh
     wget
     which
-    xfce.terminal
     zeal
     zip
   ];
