@@ -146,7 +146,9 @@ For instance you might easily add/share some `vim`, `tmux` or `zsh` configuratio
 
 To share simple dotfiles configuration, for instance let say you want to share a default `.zshrc` file for the devbox, you can simply add the file to the [CIRB dotfiles repositry](https://github.com/CIRB/devbox-dotfiles). The file is now part of the default CIRB dotfiles source repository and will be pushed on the devbox at the next provisioning.
 
-If you want to share a non trivial, external or optional configuration, you can use or create a specific source repository for it and register the repository [here](https://github.com/CIRB/vcsh_mr_template/tree/master/.config/mr/available.d). If you want the configuration to be active by default, you then add a link to it in the SCM, just like [this one](https://github.com/CIRB/vcsh_mr_template/blob/master/.config/mr/config.d/dotfiles.vcsh). On the other hand, if you want it to be inactive by default ([spacemacs](https://github.com/CIRB/vcsh_mr_template/blob/master/.config/mr/available.d/spacemacs.mr) is one example), you would ask the interested users to make the link themselves on their box.
+If you want to share a non trivial, external or optional configuration, you can use or create a specific source repository for it and register the repository [here](https://github.com/CIRB/vcsh_mr_template/tree/master/.config/mr/available.d).
+
+If you want the configuration to be active by default, you then add a link to it in the SCM, just like [this one](https://github.com/CIRB/vcsh_mr_template/blob/master/.config/mr/config.d/dotfiles.vcsh). On the other hand, if you want it inactive by default, you would ask the interested users to make the link themselves on their box.
 
 ---
 
@@ -208,7 +210,7 @@ vagrant up --no-provision
 vagrant provision --provision-with system
 vagrant reload
 rm -rf /tmp/system # on the future packaged box
-²vagrant package --output devbox-x.x.x --vagrantfile Vagrantfile
+vagrant package --output devbox-x.x.x --vagrantfile Vagrantfile
 ```
 
 The size of the repackaged vagrant box is ~ 2G.
