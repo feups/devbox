@@ -174,6 +174,10 @@ If you need a package in 'user space' (and you are not interested in sharing suc
 → nix-env -i geany
 ```
 
+You can quickly search for packages online at [nixos.org](https://nixos.org/nixos/packages.html)
+
+---
+
 ## How is the box generated ?
 
 The box is generated using packer and the source files from [here](https://github.com/zimbatm/nixbox):
