@@ -83,7 +83,6 @@
     gnumake
     haskellPackages.shake
     haskellPackages.xmobar
-    hiera-eyaml
     htop
     iputils
     jq
