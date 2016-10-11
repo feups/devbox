@@ -6,6 +6,15 @@
     packageOverrides = super:
 
       let self = super.pkgs;
+          hiera-eyaml-gpg = self.bundlerEnv rec {
+            name = "hiera-eyaml-gpg-${version}";
+            version = "0.6";
+
+            gemfile = ./pkgs/hiera-eyaml-gpg/Gemfile;
+            lockfile = ./pkgs/hiera-eyaml-gpg/Gemfile.lock;
+            gemset = ./pkgs/hiera-eyaml-gpg/gemset.nix;
+
+          };
           asciidoctor = self.bundlerEnv rec {
             name = "asciidoctor-${version}";
             version = "1.5.4";
@@ -22,6 +31,6 @@
           };
       in
       {
-      inherit asciidoctor;
+      inherit asciidoctor hiera-eyaml-gpg;
       };
 }
