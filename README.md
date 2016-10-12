@@ -37,17 +37,26 @@
 In the host, pick a folder of your choice (where the `Vagrantfile` will sit). In this folder:
 
 1. create a directory `ssh-keys`.
-2. copy your `Bitbucket` key pair, rename them 'cirb_rsa' and 'cirb_rsa.pub' respectively if the filename differs.
-3. copy your `Github` key pair, rename them 'cirb_github_rsa' and 'cirb_github_rsa.pub'. If you use the same key pair, copy the previous pair and rename accordingly.
-4. optionally copy the [params file](https://github.com/CIRB/devbox/blob/master/user/params.sh)
+2. in the ssh-keys subfolder, copy your `Bitbucket` key pair, rename them 'cirb_rsa' and 'cirb_rsa.pub' respectively if the filename differs.
+3. in the ssh-keys subfolder, copy your `Github` key pair, rename them 'cirb_github_rsa' and 'cirb_github_rsa.pub'. If you use the same key pair, copy the previous pair and rename accordingly.
+4. optionally copy the [params file](https://github.com/CIRB/devbox/blob/master/user/params.sh). Do not copy/paste from Github UI, download source and edit to avoid unwanted characters. 
 
 ### box import
 
 Open a terminal in the picked folder and type:
 
+To download the base box from our CIRB repository:
 ```
 vagrant box add devbox http://repo.irisnet.be/boxes/devbox.box
+```
+To initialize the box:
+```
 vagrant init devbox && vagrant up
+```
+Note that if you are using an older version of virtualbox (5.0.2x), you will have to *connect the cable*. See [Troubleshooting](#troubleshooting)
+
+To finalize your first time setup, restart your box: 
+```
 vagrant reload
 ```
 
@@ -125,6 +134,7 @@ You can easily enable your puppet and salt repository for your `hostgroup`. For 
 .config/mr/config.d
 ln -s ../available.d/puppet-bos.mr .
 ln -s ../available.d/salt-bos.mr .
+cd
 mr -f up
 ```
 
