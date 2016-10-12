@@ -252,7 +252,16 @@ The size of the repackaged vagrant box is ~ 2G.
 ## Troubleshooting
 
 - With virtualbox `5.0.x`, for some host OS, Vagrant does not start its network interface. You will need to manually go "Machine -> Configuration -> Network" and ensure the box "Cable Connected" is checked.
+- For Windows 10 users:
 
+There is currently an issue regarding the Windows 10 platform as it does not allow you to use hyper-v with other hypervisors (virtualbox vmware,...) and we cannot offer a hyper-v-compatible box due to the fact that packer does not support Hyper-v. 
+
+The only use of hyper-v we have detected so far is by the latest version of *Docker for Windows*. 
+
+In order to have both docker and the devbox working at the same time, please 
+- disable hyper-v, 
+- use virtualbox as hypervisor,
+- and install the docker tools based on a virtualbox machine.
 
 ## Life cycle
 
