@@ -50,14 +50,13 @@ To initialize the box:
 ```
 vagrant init devbox && vagrant up
 ```
-NOTE: if you are using an older version of virtualbox (5.0.2x), you will have to *connect the cable*. See [Troubleshooting](#troubleshooting)
+NOTE: if you are using an older version of virtualbox (5.0.2x), you will have to *connect the cable*. See <<Troubleshooting>>
 
 To finalize your first time setup, restart your box:
 ```
 vagrant reload
 ```
 
----
 
 ## Usage
 
@@ -83,8 +82,6 @@ vagrant provision --provision-with system
 vagrant provision --provision-with user
 ```
 
----
-
 ### operating system
 
 The devbox is based on https://nixos.org/[NixOS] version 16.09. NixOS is a Linux distribution based on the https://nixos.org/nix/[nix] package manager.
@@ -96,8 +93,6 @@ To clean-up the store (whenever the disk usage is too high) use:
 ```
 → sudo nix-collect-garbage -d
 ```
-
----
 
 ### windows manager
 
@@ -136,8 +131,6 @@ cd
 mr -f up
 ```
 
----
-
 ## Customization
 
 ### system
@@ -154,8 +147,6 @@ After changing the `local-configuration.nix` file, rebuild `nixos` by using this
 
 `local-configuration.nix` is never overridden by a call for provisioning. To avoid losing your changes after a `vagrant destroy`, you might want to copy the file to '/vagrant'. In fact if `local-configuration.nix` exists on the host (where the `Vagrantfile` sits), it will be used the first time a box is provisioned.
 
----
-
 ### user
 
 #### params
@@ -165,7 +156,6 @@ You can tweak some default settings such as "do I want to install the geppetto p
 ```
 → cp /tmp/user/devbox-x.x.x/user/params.sh /vagrant/params.sh
 ```
-
 
 #### dotfiles
 
@@ -195,8 +185,6 @@ As a note, if you want to override the CIRB dotfiles completely you can replace 
 
 For more information about `vcsh`, https://github.com/RichiH/vcsh/blob/master/doc/README.md#from-zero-to-vcsh[Look here].
 
----
-
 #### local packages
 
 If you need a package in 'user space' (and you are not interested in sharing such configuration), you might prefer the more imperative approach:
@@ -206,7 +194,6 @@ If you need a package in 'user space' (and you are not interested in sharing suc
 ```
 
 You can quickly search for packages online at https://nixos.org/nixos/packages.html[nixos.org]
-
 
 #### terminal emulator
 
@@ -244,8 +231,8 @@ vagrant package --output devbox-x.x.x --vagrantfile Vagrantfile
 
 The size of the repackaged vagrant box is ~ 2G.
 
----
 
+[[Troubleshooting]]
 ## Troubleshooting
 
 virtualbox `5.0.x`:: for some host OS, Vagrant does not start its network interface. You will need to manually go "Machine -> Configuration -> Network" and ensure the box "Cable Connected" is checked.
@@ -261,6 +248,7 @@ In order to have both docker and the devbox working at the same time, please
 a. disable hyper-v
 a. use virtualbox as hypervisor
 a. and install the docker tools based on a virtualbox machine.
+
 
 ## Life cycle
 
