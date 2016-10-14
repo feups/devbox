@@ -25,7 +25,6 @@ toc::[]
 - Virtualbox 5.1.x
 - Vagrant 1.8.x
 
----
 
 ## Quick first time setup
 
@@ -106,6 +105,7 @@ The devbox comes with a https://en.wikipedia.org/wiki/Tiling_window_manager[tili
 
 |======
 |Command |Description
+
 | kbd:[<Super> p] |Open Menu
 | kbd:[<Super> t] |New terminal
 | kbd:[<Super> 1..9] |Go to nth desktop
@@ -119,7 +119,7 @@ The devbox comes with a https://en.wikipedia.org/wiki/Tiling_window_manager[tili
 
 ### projects
 
-The first time, the machine is provisioned a folder `~/projects/cicd` is created. This directory will be empty.
+The first time the machine is provisioned, a folder `~/projects/cicd` is created. This directory will be empty.
 
 You can easily enable your puppet and salt repository for your `hostgroup`. For the `bos` hostgroup, you would do:
 
@@ -145,7 +145,7 @@ After changing the `local-configuration.nix` file, rebuild `nixos` by using this
 → sudo nixos-rebuild switch
 ```
 
-`local-configuration.nix` is never overridden by a call for provisioning. To avoid losing your changes after a `vagrant destroy`, you might want to copy the file to '/vagrant'. In fact if `local-configuration.nix` exists on the host (where the `Vagrantfile` sits), it will be used the first time a box is provisioned.
+`local-configuration.nix` is never overridden by a call for provisioning. To avoid losing your changes after a `vagrant destroy`, you might want to copy the file to `/vagrant`. In fact if `local-configuration.nix` exists on the host (where the `Vagrantfile` sits), it will be used the first time a box is provisioned.
 
 ### user
 
@@ -169,7 +169,6 @@ If you want to share a non trivial, external or optional configuration, you can 
 
 If you want the configuration to be active by default, you then add a link to it in the SCM, just like https://github.com/CIRB/vcsh_mr_template/blob/master/.config/mr/config.d/dotfiles.vcsh[this one]. On the other hand, if you want it inactive by default, you would ask the interested users to make the link themselves on their box.
 
----
 
 Eventually there is a third option. Some of your configurations are personal and there is no need for them to be shared inside the CIRB organization. You normally won't need that option but it is there for flexibility sake. 3 steps are required:
 
@@ -235,7 +234,9 @@ The size of the repackaged vagrant box is ~ 2G.
 [[Troubleshooting]]
 ## Troubleshooting
 
-virtualbox `5.0.x`:: for some host OS, Vagrant does not start its network interface. You will need to manually go "Machine -> Configuration -> Network" and ensure the box "Cable Connected" is checked.
+Virtualbox 5.0.x::
++
+For some host OS, Vagrant does not start its network interface. You will need to manually go to menu:Machine[Configuration > Network] and ensure the box "Cable Connected" is checked.
 
 For Windows 10 users::
 +
