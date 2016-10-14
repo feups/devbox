@@ -1,4 +1,8 @@
 # DEVBOX
+ifndef::env-github[]
+include::meta.adoc[]
+{latest_revision}
+endif::env-github[]
 :page-layout: docs
 :toc: left
 :toclevels: 2
@@ -18,6 +22,7 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::env-github[]
+
 
 toc::[]
 
@@ -247,9 +252,10 @@ The only use of hyper-v we have detected so far is by the latest version of *Doc
 +
 In order to have both docker and the devbox working at the same time, please
 +
-a. disable hyper-v
-a. use virtualbox as hypervisor
-a. and install the docker tools based on a virtualbox machine.
+[lowerroman]
+. disable hyper-v
+. use virtualbox as hypervisor
+. install the docker tools based on a virtualbox machine.
 
 
 ## Life cycle
