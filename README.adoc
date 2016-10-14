@@ -9,6 +9,7 @@
 :source-language: bash
 :source-highlighter: pygments
 :experimental:
+:docinfo1:
 ifdef::env-github[]
 :toc-placement: preamble
 :tip-caption: :bulb:
