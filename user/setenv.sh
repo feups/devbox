@@ -1,11 +1,17 @@
 #! /usr/bin/env bash
 
+# The Vagrantfile assumes the working dir is where setenv sits.
+# But we actually want to go one level down at the root of the devbox projects.
+# This assumption from the Vagrantfile could be changed but not within the 1.x.x release cycle.
+# TODO: for the 2.x.x release, remove the pushd/popd instruction and change the Vagrantfile accordingly
+pushd ..
+
 eclipse_version='4.5.2'
 
 if [[ -f "/vagrant/params.sh" ]]; then
     source /vagrant/params.sh
 else
-    source ./params.sh
+    source user/params.sh
 fi
 
 eclipse_plugins=${eclipse_plugins:=false}
@@ -26,10 +32,15 @@ function install_dotfiles {
 
 # Shared common files that will be overridden when provisioning a new configuration
 function install_commonfiles {
-    echo "Installing common files"
+    echo "Installing nixpkgs files"
 
-    install -Dm644 config.nix "${HOME}/.nixpkgs/config.nix";
-    cp -r pkgs "${HOME}/.nixpkgs/"
+    install -Dm644 user/config.nix "${HOME}/.nixpkgs/config.nix";
+    cp -r user/pkgs "${HOME}/.nixpkgs/"
+
+    echo "Installing doc files"
+    make doc
+    install -Dm644 doc/devbox.html "${HOME}/.local/share/doc/devbox.html"
+    install -Dm644 doc/devbox.pdf "${HOME}/.local/share/doc/devbox.pdf"
 }
 
 function install_pk_keys {
@@ -37,7 +48,7 @@ function install_pk_keys {
         echo "No ssh-keys directory found. Will abort user provisioning."
         exit 1
     fi
-    cp ssh-config "${HOME}/.ssh/config";
+    cp user/ssh-config "${HOME}/.ssh/config";
     if [[ -f /vagrant/ssh-keys/config_mygithub ]]; then
         # in case of 'vagrant destroy' re-use saved config_mygithub file
         cp --verbose -n /vagrant/ssh-keys/config_mygithub "${HOME}/.ssh/config_mygithub"
@@ -85,3 +96,5 @@ if $eclipse_plugins; then
         install_eclipse_plugin "com.puppetlabs.geppetto" "http://geppetto-updates.puppetlabs.com/4.x"
     fi
 fi
+
+popd
