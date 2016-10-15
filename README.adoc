@@ -262,6 +262,14 @@ In order to have both docker and the devbox working at the same time, please
 
 Tickets and issues are handled in http://jira.cirb.lan/browse/CICDPROJ-150[Jira]
 
-The versioning scheme used is semantic: `major.minor.patch`. Please look at the https://github.com/CIRB/devbox/blob/master/CHANGELOG.md[Changelog] for more information.
+The versioning scheme used is semantic: `major.minor.patch`. A major jump implies some incompatible changes likely from the `vagrantFile` and forces to:
 
-The devbox will be maintained continously with at least a major release every six months to follow the OS lifecycle.
+[lowerroman]
+. destroy the old box losing all current statefootnote:[the README describes several tricks to keep/store your customization] : `vagrant destroy`
+. remove the old box: `vagrant box remove devbox`
+. add the new one: `vagrant box add devbox http://repo.irisnet.be/boxes/devbox.box`
+. initialize the new box: `vagrant init devbox && vagrant up`
+
+Please look at the https://github.com/CIRB/devbox/blob/master/CHANGELOG.adoc[Changelog] for more information.
+
+The devbox will be maintained continuously with at least a major release every six months to follow the OS life cycle.
