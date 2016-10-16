@@ -98,4 +98,4 @@ if $eclipse_plugins; then
     fi
 fi
 
-popd
+popd > /dev/null
