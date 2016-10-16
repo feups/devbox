@@ -99,6 +99,7 @@
     python
     shellcheck
     silver-searcher
+    stalonetray
     tmux
     tree
     unzip
@@ -106,6 +107,7 @@
     vcsh
     wget
     which
+    xsel
     zeal
     zip
   ];
