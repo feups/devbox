@@ -40,6 +40,7 @@ function install_commonfiles {
     echo "Installing doc files"
     make doc
     install -Dm644 doc/devbox.html "${HOME}/.local/share/doc/devbox.html"
+    install -Dm644 doc/docinfo.html "${HOME}/.local/share/doc/docinfo.html"
     install -Dm644 doc/devbox.pdf "${HOME}/.local/share/doc/devbox.pdf"
 }
 
