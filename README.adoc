@@ -273,3 +273,13 @@ The versioning scheme used is semantic: `major.minor.patch`. A major jump implie
 Please look at the https://github.com/CIRB/devbox/blob/master/CHANGELOG.adoc[Changelog] for more information.
 
 The devbox will be maintained continuously with at least a major release every six months to follow the OS life cycle.
+
+ifndef::env-github[]
+## Changelog
+
+:leveloffset: +1
+
+include::CHANGELOG.adoc[lines=2..-1]
+
+:leveloffset: -1
+endif::env-github[]

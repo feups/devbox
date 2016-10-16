@@ -5,12 +5,13 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
-- Add `revision` (version, date) to README
+- README improvements:
 +
-The revision attribute is fetched from a meta text file
-- The `README` is now available offline.
+The README is now available offline within the box.
 +
 Press kbd:[F1] as usual to view it.
++
+A revision tag (version, date) and  the changelog have been added. You always know which version of the box you are running.
 
 ## v1.0, 12/10/2016
 
