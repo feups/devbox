@@ -6,19 +6,13 @@ include::meta.adoc[]
 ## {latest_revision}
 
 - Add stalonetray
-
-## v1.1.0, 15/10/2016
-
 - Add `revision` (version, date) to README
 +
 The revision attribute is fetched from a meta text file
-
-## v1.1.0, 15/10/2016
-
 - The `README` is now available offline.
 +
 Press kbd:[F1] as usual to view it.
 
-## v1.0.0, 12/10/2016
+## v1.0, 12/10/2016
 
 * Initial release
