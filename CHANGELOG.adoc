@@ -5,7 +5,6 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
-- Add stalonetray
 - Add `revision` (version, date) to README
 +
 The revision attribute is fetched from a meta text file
