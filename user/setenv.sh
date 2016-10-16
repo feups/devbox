@@ -4,7 +4,7 @@
 # But we actually want to go one level down at the root of the devbox projects.
 # This assumption from the Vagrantfile could be changed but not within the 1.x.x release cycle.
 # TODO: for the 2.x.x release, remove the pushd/popd instruction and change the Vagrantfile accordingly
-pushd ..
+pushd .. > /dev/null
 
 eclipse_version='4.5.2'
 
