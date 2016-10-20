@@ -125,17 +125,21 @@ The devbox comes with a https://en.wikipedia.org/wiki/Tiling_window_manager[tili
 
 ### projects
 
-The first time the machine is provisioned, a folder `~/projects/cicd` is created. This directory will be empty.
+By default, there will be no project on the box. You will need to enable some `mr` repositories associated with your `hostgroup`.
 
-You can easily enable your puppet and salt repository for your `hostgroup`. For the `bos` hostgroup, you would do:
+For instance, for the `bos` hostgroup, you would do the following:
 
 ```
-.config/mr/config.d
-ln -s ../available.d/puppet-bos.mr .
-ln -s ../available.d/salt-bos.mr .
-cd
-mr -f up
+→ cd .config/mr/config.d
+→ ln -s ../available.d/puppet-bos.mr .
+→ ln -s ../available.d/salt-bos.mr .
+→ cd
+→ mr -f up <1>
 ```
+<1> you usually don't want to automatically update such repository on provisioning. That's the reason behind the `-f` (force) flag.
+
+By convention, all `cicd` projects will be placed inside the `/projects/cicd` folder hierarchy.
+
 
 ## Customization
 
