@@ -123,6 +123,19 @@ The devbox comes with a https://en.wikipedia.org/wiki/Tiling_window_manager[tili
 | kbd:[F 1] |Open this README in a browser
 |======
 
+### terminal emulator
+
+The `devbox` uses the `urxvt` terminal for its speed and customization.
+
+|=====
+|Command | Description
+
+|kbd:[<Control> <Meta> p]|Change theme
+|kbd:[<Control> <Shift> up/down] |Increase/Decrease font size
+|kbd:[<Meta> <s>] |Search console output
+|kbd:[<Control><Meta> c/v] | Copy/paste to/from clipboard
+|=====
+
 ### projects
 
 By default, there will be no project on the box. You will need to enable some `mr` repositories associated with your `hostgroup`.
@@ -213,18 +226,6 @@ If you need a package in 'user space' (and you are not interested in sharing suc
 
 You can quickly search for packages online at https://nixos.org/nixos/packages.html[nixos.org]
 
-#### terminal emulator
-
-The `devbox` uses the `urxvt` terminal for its speed and customization.
-
-|=====
-|Command | Description
-
-|kbd:[<Control> <Meta> p]|Change theme
-|kbd:[<Control> <Shift> up/down] |Increase/Decrease font size
-|kbd:[<Meta> <s>] |Search console output
-|kbd:[<Control><Meta> c/v] | Copy/paste to/from clipboard
-|=====
 
 ## How is the box generated ?
 
