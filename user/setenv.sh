@@ -18,6 +18,15 @@ eclipse_plugins=${eclipse_plugins:=false}
 eclipse_geppetto=${eclipse_geppetto:=false}
 mr_template_repo_url=${mr_template_repo_url:="git://github.com/CIRB/vcsh_mr_template.git"}
 
+function setupGitConfig {
+   if [[ -n "$user_name" ]]; then
+       git config --global user.name "$user_name"
+   fi
+   if [[ -n "$user_email" ]]; then
+       git config --global user.email "$user_email"
+   fi
+}
+
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
 function install_dotfiles {
     echo "Installing dotfiles"
@@ -87,6 +96,7 @@ function install_eclipse_plugin {
 ####     Main ####
 echo     "Configuring user"
 
+setupGitConfig
 install_pk_keys
 install_dotfiles
 install_commonfiles

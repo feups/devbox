@@ -10,10 +10,10 @@ endif::env-github[]
 :sectnumlevels: 1
 :nofooter:
 :icons: font
+:docinfo1:
 :source-language: bash
 :source-highlighter: pygments
 :experimental:
-:docinfo1:
 ifdef::env-github[]
 :toc-placement: preamble
 :tip-caption: :bulb:
@@ -166,6 +166,15 @@ You can tweak some default settings such as "do I want to install the geppetto p
 ```
 → cp /tmp/user/devbox-x.x.x/user/params.sh /vagrant/params.sh
 ```
+
+`vagrant provision` will automatically configure your global `.gitconfig`, if you add your `user.name` and `user.email`:
+
+.params.sh
+```
+user_name="John Doe"
+user_email="jdoe@cirb.brussels"
+```
+WARNING: Don't separate `=` with spaces
 
 #### dotfiles
 

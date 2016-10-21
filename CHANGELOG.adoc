@@ -5,6 +5,10 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
+- Add git `user.name` and `user.email` at provisioning time
+
+## v1.1, 17/10/2016
+
 - README improvements:
 +
 The README is now available offline within the box.
