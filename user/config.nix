@@ -22,6 +22,18 @@
           http-api-data = (dontCheck haskellPackages.http-api-data_0_3_1).override {inherit QuickCheck quickcheck-instances; };
           servant = (dontCheck haskellPackages.servant_0_9).override {inherit http-api-data; };
           servant-client = (dontCheck haskellPackages.servant-client_0_9).override {inherit http-api-data servant;};
+          language-puppet_1_3_3 = self.lib.overrideDerivation (haskellPackages.language-puppet.override {inherit servant servant-client;}) (super: rec {
+            name = "language-puppet-${version}";
+            version = "1.3.3";
+            doCheck = false;
+            doHaddock = false;
+            src = self.fetchFromGitHub {
+              rev    = "4125d27d9ec87cb0e63429a17d3a916e07023f15";
+              owner  = "pierrer";
+              repo   = "language-puppet";
+              sha256 = "1l595fmypbr524hm07wlmrbx2xx3xfigcqs32aflamxv05gh4g2d";
+            };
+          });
           asciidoctor = self.bundlerEnv rec {
             name = "asciidoctor-${version}";
             version = "1.5.4";
@@ -41,7 +53,7 @@
       inherit asciidoctor hiera-eyaml-gpg;
       haskellPackages = super.haskellPackages.override {
         overrides = self: super: {
-          language-puppet_1_3_3 = dontCheck (self.callPackage ./pkgs/language-puppet {inherit servant servant-client;});
+          inherit language-puppet_1_3_3;
         };
       };
     };
