@@ -153,6 +153,24 @@ For instance, for the `bos` hostgroup, you would do the following:
 
 By convention, all `cicd` projects will be placed inside the `/projects/cicd` folder hierarchy.
 
+### cicd
+
+The `box` comes with some handy shortcuts.
+
+While working on a puppet catalog, at the root of the project, you might want to use:
+
+.#see#
+```
+→ see jenkins/slave_prod <1>
+```
+<1> shortcut for https://github.com/bartavelle/language-puppet#puppetresources[puppetresources]
+
+.#fix-lint#
+```
+fix-lint modules/application/manifests/profile/jenkins/slave.pp <1>
+```
+<1> shortcut for http://puppet-lint.com[puppet-lint --fix]
+
 
 ## Customization
 

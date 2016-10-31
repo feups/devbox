@@ -5,6 +5,12 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
+- Add fix-lint alias
++
+To quickly fix puppet-lint errors and warnings (see <<_cicd>> )
+
+## v1.2, 24/10/2016
+
 - Add git `user.name` and `user.email` at provisioning time
 
 ## v1.1, 17/10/2016
