@@ -3,5 +3,3 @@ ssh-keys/
 dotfiles/
 user/result
 doc/devbox.*
-_site/
-*_brackets.html
