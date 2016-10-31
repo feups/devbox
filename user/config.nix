@@ -15,6 +15,14 @@
             gemset = ./pkgs/hiera-eyaml-gpg/gemset.nix;
 
           };
+          puppet-env = self.bundlerEnv rec {
+            name = "puppet-env-${version}";
+            version = "4.7.0";
+
+            gemfile = ./pkgs/puppet-env/Gemfile;
+            lockfile = ./pkgs/puppet-env/Gemfile.lock;
+            gemset = ./pkgs/puppet-env/gemset.nix;
+          };
           asciidoctor = self.bundlerEnv rec {
             name = "asciidoctor-${version}";
             version = "1.5.4";
@@ -31,6 +39,6 @@
           };
       in
       {
-      inherit asciidoctor hiera-eyaml-gpg;
+      inherit asciidoctor hiera-eyaml-gpg puppet-env;
       };
 }
