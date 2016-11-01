@@ -165,9 +165,9 @@ While working on a puppet catalog, at the root of the project, you might want to
 ```
 <1> shortcut for https://github.com/bartavelle/language-puppet#puppetresources[puppetresources]
 
-.#fix-lint#
+.#fixlint#
 ```
-fix-lint modules/application/manifests/profile/jenkins/slave.pp <1>
+fixlint modules/application/manifests/profile/jenkins/slave.pp <1>
 ```
 <1> shortcut for http://puppet-lint.com[puppet-lint --fix]
 

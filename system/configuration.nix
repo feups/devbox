@@ -157,6 +157,7 @@
     vim = "nvim";
     build = "./build/build.sh";
     see = "./bin/check_role.sh";
+    fixlint = "./bin/fix-lint.sh";
   };
 
   programs.bash.interactiveShellInit = ''

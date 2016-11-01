@@ -5,7 +5,7 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
-- Add fix-lint alias
+- Add `fixlint` alias
 +
 To quickly fix puppet-lint errors and warnings (see <<_cicd>> )
 
