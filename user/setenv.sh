@@ -95,7 +95,6 @@ function install_eclipse_plugin {
 ####     Main ####
 echo     "Configuring user"
 
-setupGitConfig
 install_pk_keys
 install_dotfiles
 install_commonfiles
@@ -106,5 +105,6 @@ if $eclipse_plugins; then
         install_eclipse_plugin "com.puppetlabs.geppetto" "http://geppetto-updates.puppetlabs.com/4.x"
     fi
 fi
+setupGitConfig
 
 popd > /dev/null
