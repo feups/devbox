@@ -35,9 +35,11 @@
 
   time.timeZone = "Europe/Amsterdam";
 
+  services.dbus.enable = true;
+  services.ntp.enable = false;
   services.openssh.enable = true;
-  services.dbus.enable    = true;
-  services.timesyncd.enable = true;
+  services.openssh.allowSFTP = false;
+  services.openssh.passwordAuthentication = false;
 
   services.xserver = {
     enable = true;
