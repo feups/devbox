@@ -294,8 +294,6 @@ ifndef::env-github[]
 
 include::puppet.adoc[]
 
-include::hiera.adoc[]
-
 include::CHANGELOG.adoc[]
 
 :leveloffset: -1
