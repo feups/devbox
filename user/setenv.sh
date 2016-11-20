@@ -47,7 +47,7 @@ function install_commonfiles {
     cp -r user/pkgs "${HOME}/.nixpkgs/"
 
     echo "Installing doc files"
-    curl http://stash.cirb.lan/projects/CICD/repos/puppet-shared-scripts/raw/README.md?at=refs/heads/master > puppet.adoc
+    curl http://stash.cirb.lan/projects/CICD/repos/puppet-shared-scripts/raw/README.adoc?at=refs/heads/master > puppet.adoc
     make doc
     install -Dm644 doc/devbox.html "${HOME}/.local/share/doc/devbox.html"
     install -Dm644 doc/devbox.pdf "${HOME}/.local/share/doc/devbox.pdf"
