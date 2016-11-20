@@ -1,9 +1,12 @@
 # Changelog
-:experimental:
 
 include::meta.adoc[]
 
 ## {latest_revision}
+
+- Include http://stash.cirb.lan/projects/CICD/repos/puppet-shared-scripts/browse/README.adoc[puppet doc] inside the README
+
+## v1.3, 31/10/2016
 
 - Add `fixlint` alias
 +
