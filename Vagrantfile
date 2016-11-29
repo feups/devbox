@@ -44,6 +44,7 @@ Vagrant.configure("2") do |config|
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       cp --verbose "${configdir}/system/configuration.nix" "/etc/nixos/configuration.nix";
       cp --verbose -n "${configdir}/system/local-configuration.nix" "/etc/nixos/local-configuration.nix"
+      rsync -av --chmod=644 ${configdir}/system/pkgs/ /etc/cicd/
       popd > /dev/null;
     fi
 

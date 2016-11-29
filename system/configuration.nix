@@ -40,6 +40,11 @@
   services.openssh.enable = true;
   services.openssh.allowSFTP = false;
   services.openssh.passwordAuthentication = false;
+  services.dnsmasq.enable = true;
+  services.dnsmasq.extraConfig = ''
+    server = /cicd/127.0.0.1#5354
+  '';
+
 
   services.xserver = {
     enable = true;
@@ -77,10 +82,12 @@
     bundix
     cabal2nix
     chromium
+    dnsmasq
     docker
     findutils
     firefox
     gitFull
+    go2nix
     gnupg
     gnumake
     haskellPackages.shake
@@ -173,4 +180,31 @@
 
   system.stateVersion = "16.09";
 
+  nixpkgs.config = {
+    packageOverrides = super:
+      let self = super.pkgs;
+      puppetdb-dns = self.buildGoPackage rec {
+        name = "puppetdb-dns-${version}";
+        version = "20161124-${self.stdenv.lib.strings.substring 0 7 rev}";
+        rev = "073c226ec6f81d4fb6554a478780e26d90016e4e";
+        goPackagePath = "github.com/jfroche/puppetdb-dns";
+        src = self.fetchgit {
+          inherit rev;
+          url = "https://github.com/jfroche/puppetdb-dns";
+          sha256 = "1y0l8248skh0wl1qhzhz27qzlcya6l4l9zb0b20jz8p66zzfpsx5";
+        };
+        goDeps = /etc/puppetdb-dns/deps.nix;
+      };
+      in { inherit puppetdb-dns; };
+  };
+  systemd.services.puppetdb-dns = {
+    description = "Puppetdb DNS service";
+    after = [ "network.target" "systemd-dnsmasq.service" ];
+    wantedBy = [ "multi-user.target" ];
+    script = ''
+      ${pkgs.puppetdb-dns}/bin/puppetdb-dns -conf /etc/cicd/puppetdb-dns/dns.conf
+    '';
+  };
+
+  systemd.tmpfiles.rules = [ "d /tmp 1777 root root 10d" ];
 }
