@@ -19,8 +19,6 @@
 
   networking.enableIPv6 = false;
 
-  nixpkgs.config.allowUnfree = true;
-
   nix.extraOptions = ''
     gc-keep-outputs = true
     gc-keep-derivations = true
@@ -181,6 +179,7 @@
   system.stateVersion = "16.09";
 
   nixpkgs.config = {
+    allowUnfree = true;
     packageOverrides = super:
       let self = super.pkgs;
       puppetdb-dns = self.buildGoPackage rec {
