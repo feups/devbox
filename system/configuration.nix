@@ -192,7 +192,7 @@
           url = "https://github.com/jfroche/puppetdb-dns";
           sha256 = "1y0l8248skh0wl1qhzhz27qzlcya6l4l9zb0b20jz8p66zzfpsx5";
         };
-        goDeps = /etc/puppetdb-dns/deps.nix;
+        goDeps = /etc/cicd/puppetdb-dns/deps.nix;
       };
       in { inherit puppetdb-dns; };
   };
