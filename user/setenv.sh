@@ -101,5 +101,3 @@ if $eclipse_plugins; then
     fi
 fi
 setupGitConfig
-
-popd > /dev/null
