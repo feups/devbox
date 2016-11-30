@@ -155,15 +155,16 @@ By convention, all `cicd` projects will be placed inside the `/projects/cicd` fo
 
 ### cicd
 
-You can use a semantic name #$subgroup.$role.$hostgroup.zone.cicd# as a `dns` to lookup any machine known by `puppetdb`.
+You can use a semantic name as a `dns` to lookup any machine known by `puppetdb`. The pattern to use is: #$subgroup.$role.$hostgroup.zone.cicd#.
+
 For instance if you want to connect through ssh to the `bos` jenkins slave, you can (inside the devbox) use:
 
 ```
 →  ssh -i ~/.cirb_rsa username@jenkins.slave.bos.prod.cicd
 ```
-For more specific cicd help, have a look at the following section:
+For more specific help, you can look at the following section:
 
-<<_puppet>>
+- <<_puppet>>
 
 ## Customization
 
