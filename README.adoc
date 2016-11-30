@@ -49,8 +49,10 @@ Open a terminal in the picked folder and type:
 
 To download the base box from our CIRB repository:
 ```
-vagrant box add devbox http://repo.irisnet.be/boxes/devbox.box
+vagrant box add devbox http://repo.irisnet.be/boxes/devbox.box <1>
 ```
+<1> You can also use 'devbox-novagrant.box' and maintain a Vagrantfile locally
+
 To initialize the box:
 ```
 vagrant init devbox && vagrant up
