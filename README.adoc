@@ -153,6 +153,18 @@ For instance, for the `bos` hostgroup, you would do the following:
 
 By convention, all `cicd` projects will be placed inside the `/projects/cicd` folder hierarchy.
 
+### cicd
+
+You can use a semantic name #$subgroup.$role.$hostgroup.zone.cicd# as a `dns` to lookup any machine known by `puppetdb`.
+For instance if you want to connect through ssh to the `bos` jenkins slave, you can (inside the devbox) use:
+
+```
+→  ssh -i ~/.cirb_rsa username@jenkins.slave.bos.prod.cicd
+```
+For more specific cicd help, have a look at the following section:
+
+<<_puppet>>
+
 ## Customization
 
 ### system

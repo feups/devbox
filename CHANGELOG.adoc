@@ -4,6 +4,15 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
+- Any machine known by `puppetdb` can be looked up using a semantic name ($subgroup.$role.$hostgroup.zone.cicd)
+For instance if you want to connect through ssh to the `bos` jenkins slave, you would use:
+
+```
+→  ssh -i ~/.cirb_rsa username@jenkins.slave.bos.prod.cicd
+```
+
+## v1.4, 21/11/2016
+
 - Include http://stash.cirb.lan/projects/CICD/repos/puppet-shared-scripts/browse/README.adoc[puppet doc] inside the README
 
 ## v1.3, 31/10/2016
