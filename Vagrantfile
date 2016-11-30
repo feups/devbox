@@ -72,9 +72,9 @@ Vagrant.configure("2") do |config|
       echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/user > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
-      pushd ${configdir}/user > /dev/null;
-      chmod +x ./setenv.sh
-      ./setenv.sh
+      pushd ${configdir} > /dev/null;
+      chmod +x ./user/setenv.sh
+      ./user/setenv.sh
       popd > /dev/null;
       popd > /dev/null;
     fi
