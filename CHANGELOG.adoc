@@ -4,7 +4,7 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
-- Any machine known by `puppetdb` can be looked up using a semantic name ($subgroup.$role.$hostgroup.zone.cicd)
+- Add puppetdb-dns. This allows to looked for any machine known by `puppetdb` with a semantic name.
 For instance if you want to connect through ssh to the `bos` jenkins slave, you would use:
 
 ```
