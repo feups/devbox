@@ -12,12 +12,21 @@ eclipse_plugins=${eclipse_plugins:=false}
 eclipse_geppetto=${eclipse_geppetto:=false}
 mr_template_repo_url=${mr_template_repo_url:="git://github.com/CIRB/vcsh_mr_template.git"}
 
-function setupGitConfig {
+function setupEnvConfig {
    if [[ -n "$user_name" ]]; then
        git config --global user.name "$user_name"
    fi
    if [[ -n "$user_email" ]]; then
        git config --global user.email "$user_email"
+   fi
+   if [[ -n "$user_id" ]]; then
+       echo user_id >> $HOME/.user_id
+   fi
+   if [[ -n "$user_pwd" ]]; then
+       echo user_pwd >> $HOME/.user_pwd
+   fi
+   if [[ -n "$user_stack" ]]; then
+       echo user_stack >> $HOME/.user_stack
    fi
 }
 
@@ -100,4 +109,4 @@ if $eclipse_plugins; then
         install_eclipse_plugin "com.puppetlabs.geppetto" "http://geppetto-updates.puppetlabs.com/4.x"
     fi
 fi
-setupGitConfig
+setupEnvConfig
