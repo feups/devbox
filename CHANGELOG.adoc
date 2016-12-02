@@ -4,6 +4,10 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
+- Switch from `bash` to `zsh`
+
+## v2.0, 01/11/2016
+
 WARNING: 2.x breaks the compatibility of the `Vagrantfile`. Please fetch a new box (or update your local Vagrantfile)
 
 - Add puppetdb-dns. This allows to looked for any machine known by `puppetdb` with a semantic name.
