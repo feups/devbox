@@ -83,7 +83,6 @@
     dnsmasq
     docker
     findutils
-    firefox
     gitFull
     go2nix
     gnupg

@@ -7,6 +7,7 @@
        eclipse = eclipses.eclipse-sdk-452;
        plugins = [ ];
      })
+    firefox
     haskellPackages.language-puppet
     oh-my-zsh
     zsh
