@@ -18,7 +18,7 @@
           pepper = self.buildPythonPackage rec {
             name = "salt-pepper-${version}";
             version = "0.4.1";
-            src = fetchurl {
+            src = self.fetchurl {
                 url = "https://github.com/saltstack/pepper/releases/download/${version}/${name}.tar.gz";
                 sha256 = "1a9b78afa5f68443e18569532d8216d0bf3b1364006b81f9472e4fa7a3dfcf17";
             };
