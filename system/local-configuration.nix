@@ -8,7 +8,6 @@
        plugins = [ ];
      })
     firefox
-    haskellPackages.language-puppet
     oh-my-zsh
     zsh
     # geany

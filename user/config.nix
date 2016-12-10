@@ -4,6 +4,7 @@
     allowUnfree = true;
 
     packageOverrides = super:
+      with super.haskell.lib;
 
       let self = super.pkgs;
           hiera-eyaml-gpg = self.bundlerEnv rec {
@@ -15,7 +16,7 @@
             gemset = ./pkgs/hiera-eyaml-gpg/gemset.nix;
 
           };
-          pepper = self.buildPythonPackage rec {
+          pepper = self.pythonPackages.buildPythonPackage rec {
             name = "salt-pepper-${version}";
             version = "0.4.1";
             src = self.fetchurl {
@@ -23,6 +24,10 @@
                 sha256 = "1a9b78afa5f68443e18569532d8216d0bf3b1364006b81f9472e4fa7a3dfcf17";
             };
           };
+
+          servant = dontCheck (dontHaddock self.haskellPackages.servant_0_9_1_1);
+          servant-client = dontCheck (dontHaddock self.haskellPackages.servant-client_0_9_1_1);
+
           puppet-env = self.bundlerEnv rec {
             name = "puppet-env-${version}";
             version = "4.7.0";
@@ -47,6 +52,11 @@
           };
       in
       {
-      inherit asciidoctor hiera-eyaml-gpg pepper puppet-env;
+        inherit asciidoctor hiera-eyaml-gpg pepper puppet-env;
+        haskellPackages = super.haskellPackages.override {
+          overrides = self: super: {
+            language-puppet_1_3_3 = dontCheck (dontHaddock (self.callPackage ./pkgs/language-puppet {inherit servant servant-client;}));
+          };
+        };
       };
 }
