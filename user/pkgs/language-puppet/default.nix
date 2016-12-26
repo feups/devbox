@@ -11,8 +11,8 @@
 }:
 mkDerivation {
   pname = "language-puppet";
-  version = "1.3.3";
-  sha256 = "19apjki67r48apk1sbkdm1ardfvhl927imhxfl721ph5kqsmiyk9";
+  version = "1.3.4";
+  sha256 = "1g0q203yw75hbgs5w0pp078ypxjab4jn3nq8h8xpvh0163qbai39";
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
