@@ -113,4 +113,4 @@ if $eclipse_plugins; then
     fi
 fi
 setupEnvConfig
-su - vagrant -c "nix-env -f '<nixpkgs>' -i cicd-shell -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/${nixpkgs_ref}.tar.gz"
+nix-env -f '<nixpkgs>' -i cicd-shell -I "nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/${nixpkgs_ref}.tar.gz"
