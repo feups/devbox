@@ -1,6 +1,7 @@
 # DEVBOX
 ifndef::env-github[]
 include::meta.adoc[]
+:env-devbox:
 {latest_revision}
 endif::env-github[]
 :page-layout: docs
