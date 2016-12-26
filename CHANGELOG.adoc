@@ -3,6 +3,10 @@
 include::meta.adoc[]
 
 ## {latest_revision}
+- Update `language-puppet` to 1.3.4
+- Add `cicd-shell`
+
+## v2.1, 02/11/2016
 
 - Switch from `bash` to `zsh`
 
