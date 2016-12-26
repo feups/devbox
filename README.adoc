@@ -170,9 +170,10 @@ For instance if you want to connect through ssh to the `bos` jenkins slave, you 
 ```
 →  ssh -i ~/.cirb_rsa username@jenkins.slave.bos.prod.cicd
 ```
-For more specific help, you can look at the following section:
 
-- <<_puppet>>
+In general you don't need to connect to nodes to manage, query or orchestrate them. Have a look at the <<_cicd_shell>> section to learn how to use the `cicd` command line utility.
+
+For puppet help, go to the <<_puppet>> dedicated section.
 
 ## Customization
 
