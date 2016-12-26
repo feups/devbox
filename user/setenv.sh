@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 eclipse_version='4.5.2'
-nixpkgs_ref="65830800bdaac91eae965d16df4473fc2a698fca" # http://hydra.nixos.org/build/45387163
+export nixpkgs_ref="65830800bdaac91eae965d16df4473fc2a698fca" # http://hydra.nixos.org/build/45387163
 
 if [[ -f "/vagrant/params.sh" ]]; then
     source /vagrant/params.sh
@@ -113,3 +113,4 @@ if $eclipse_plugins; then
     fi
 fi
 setupEnvConfig
+su - vagrant -c "nix-env -f '<nixpkgs>' -i cicd-shell -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/${nixpkgs_ref}.tar.gz"
