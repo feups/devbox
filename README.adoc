@@ -315,6 +315,8 @@ ifndef::env-github[]
 
 include::puppet.adoc[]
 
+include::cicd-shell.adoc[]
+
 include::CHANGELOG.adoc[]
 
 :leveloffset: -1

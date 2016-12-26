@@ -51,6 +51,7 @@ function install_commonfiles {
 
     echo "Installing doc files"
     curl -s http://stash.cirb.lan/projects/CICD/repos/puppet-shared-scripts/raw/README.adoc?at=refs/heads/master > puppet.adoc
+    curl -s http://stash.cirb.lan/projects/CICD/repos/cicd-shell/raw/README.adoc?at=refs/heads/master > cicd-shell.adoc
     make doc
     install -Dm644 doc/devbox.html "${HOME}/.local/share/doc/devbox.html"
     install -Dm644 doc/devbox.pdf "${HOME}/.local/share/doc/devbox.pdf"
