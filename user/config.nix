@@ -36,6 +36,13 @@
             lockfile = ./pkgs/puppet-env/Gemfile.lock;
             gemset = ./pkgs/puppet-env/gemset.nix;
           };
+
+          turtle = self.haskellPackages.turtle_1_3_0.overrideScope (self: super: {
+            optparse-applicative = self.optparse-applicative_0_13_0_0;
+          });
+          cicd-shell = dontCheck (dontHaddock(self.haskellPackages.callPackage ./pkgs/cicd-shell/. {
+            inherit turtle;
+          }));
           asciidoctor = self.bundlerEnv rec {
             name = "asciidoctor-${version}";
             version = "1.5.4";
@@ -52,7 +59,7 @@
           };
       in
       {
-        inherit asciidoctor hiera-eyaml-gpg pepper puppet-env;
+        inherit asciidoctor hiera-eyaml-gpg pepper puppet-env cicd-shell;
         haskellPackages = super.haskellPackages.override {
           overrides = self: super: {
             language-puppet_1_3_3 = dontCheck (dontHaddock (self.callPackage ./pkgs/language-puppet {inherit servant servant-client;}));
