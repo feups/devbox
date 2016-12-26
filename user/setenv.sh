@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 eclipse_version='4.5.2'
+nixpkgs_ref="65830800bdaac91eae965d16df4473fc2a698fca" # http://hydra.nixos.org/build/45387163
 
 if [[ -f "/vagrant/params.sh" ]]; then
     source /vagrant/params.sh
@@ -28,6 +29,7 @@ function setupEnvConfig {
    if [[ -n "$user_stack" ]]; then
        echo user_stack >> $HOME/.user_stack
    fi
+   echo nixpkgs_ref >> $HOME/.nixpkgs_ref
 }
 
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
