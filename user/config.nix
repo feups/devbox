@@ -25,9 +25,6 @@
             };
           };
 
-          servant = dontCheck (dontHaddock self.haskellPackages.servant_0_9_1_1);
-          servant-client = dontCheck (dontHaddock self.haskellPackages.servant-client_0_9_1_1);
-
           puppet-env = self.bundlerEnv rec {
             name = "puppet-env-${version}";
             version = "4.7.0";
@@ -62,7 +59,10 @@
         inherit asciidoctor hiera-eyaml-gpg pepper puppet-env cicd-shell;
         haskellPackages = super.haskellPackages.override {
           overrides = self: super: {
-            language-puppet_1_3_3 = dontCheck (dontHaddock (self.callPackage ./pkgs/language-puppet {inherit servant servant-client;}));
+            language-puppet_1_3_4 = dontCheck (dontHaddock (self.callPackage ./pkgs/language-puppet {
+              servant = self.servant_0_9_1_1;
+              servant-client = self.servant-client_0_9_1_1;
+            }));
           };
         };
       };
