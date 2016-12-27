@@ -9,6 +9,7 @@
      })
     firefox
     oh-my-zsh
+    zsh-completions
     zsh
     # geany
   ];
