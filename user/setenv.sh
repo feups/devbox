@@ -29,7 +29,7 @@ function setupEnvConfig {
    if [[ -n "$user_stack" ]]; then
        echo user_stack >> $HOME/.user_stack
    fi
-   echo nixpkgs_ref >> $HOME/.nixpkgs_ref
+   echo "${nixpkgs_ref}" > $HOME/.nixpkgs_ref
 }
 
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
