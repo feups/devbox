@@ -5,6 +5,7 @@ include::meta.adoc[]
 ## {latest_revision}
 - Add `cicd-shell`
 - Update `language-puppet` to 1.3.4
+- Add `zsh-completions` package
 
 ## v2.1, 02/12/2016
 
