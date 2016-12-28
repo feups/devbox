@@ -31,8 +31,8 @@
     heyaml= "./bin/eyaml.sh $@";
     fixlint = "./bin/fix-lint.sh";
     nixreb = "sudo nixos-rebuild switch";
-    ldir = 'ls -ladh (.*|*)(/,@)';
-    lfile = 'ls -lah *(.)';
+    ldir = "ls -ladh (.*|*)(/,@)";
+    lfile = "ls -lah *(.)";
   };
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 }
