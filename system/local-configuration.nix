@@ -21,7 +21,7 @@
   programs.zsh.shellAliases = {
     la = " ls -alh";
     ls = " ls --color=tty";
-    ll ='ls -lh';
+    ll = 'ls -lh';
     duh = " du -h --max-depth=1";
     df = " df -h";
     ag = "ag --color-line-number=3";
