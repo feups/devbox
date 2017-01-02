@@ -21,14 +21,14 @@
   programs.zsh.shellAliases = {
     la = " ls -alh";
     ls = " ls --color=tty";
-    ll='ls -lh';
+    ll ='ls -lh';
     duh = " du -h --max-depth=1";
     df = " df -h";
     ag = "ag --color-line-number=3";
     vim = "nvim";
     build = "./build/build.sh";
     see = "./bin/check_role.sh";
-    heyaml= "./bin/eyaml.sh $@";
+    heyaml = "./bin/eyaml.sh $@";
     fixlint = "./bin/fix-lint.sh";
     nixreb = "sudo nixos-rebuild switch";
     ldir = "ls -ladh (.*|*)(/,@)";

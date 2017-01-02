@@ -254,9 +254,11 @@ You can quickly search for packages online at https://nixos.org/nixos/packages.h
 The box is generated using packer and the source files from https://github.com/zimbatm/nixbox[here]:
 
 ```
-packer.exe build nixos-x86_64.json
+packer.exe build nixos-x86_64.json <1>
 vagrant box add devbox-x.x-pre packer_virtualbox-iso_virtualbox.box
 ```
+<1> be careful of keeping the linux file encoding while working on windows !
+
 The size of the 'pre box' is ~ 300M
 
 The box is then repackaged to a full vm:
