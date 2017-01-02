@@ -21,13 +21,13 @@ function setupEnvConfig {
        git config --global user.email "$user_email"
    fi
    if [[ -n "$user_id" ]]; then
-       echo user_id >> $HOME/.user_id
+       echo "$user_id" >> $HOME/.user_id
    fi
    if [[ -n "$user_pwd" ]]; then
-       echo user_pwd >> $HOME/.user_pwd
+       echo "$user_pwd" >> $HOME/.user_pwd
    fi
    if [[ -n "$user_stack" ]]; then
-       echo user_stack >> $HOME/.user_stack
+       echo "$user_stack" >> $HOME/.user_stack
    fi
    echo "${nixpkgs_ref}" > $HOME/.nixpkgs_ref
 }
