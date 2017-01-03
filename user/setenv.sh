@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 eclipse_version='4.5.2'
-export nixpkgs_ref="65830800bdaac91eae965d16df4473fc2a698fca" # http://hydra.nixos.org/build/45387163
+export nixpkgs_ref="9d0a9bc9d61f6e94d720486ddbe972af8547382d" # http://hydra.nixos.org/build/45722781
 
 if [[ -f "/vagrant/params.sh" ]]; then
     source /vagrant/params.sh
