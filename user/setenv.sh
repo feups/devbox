@@ -21,16 +21,20 @@ function setupEnvConfig {
        git config --global user.email "$user_email"
    fi
    if [[ -n "$user_id" ]]; then
-       echo "$user_id" > $HOME/.user_id
+       echo "$user_id" > "${HOME}/.user_id"
    fi
    if [[ -n "$user_pwd" ]]; then
-       echo "$user_pwd" > $HOME/.user_pwd
+       echo "$user_pwd" > "${HOME}/.user_pwd"
    fi
    if [[ -n "$user_stack" ]]; then
-       echo "$user_stack" > $HOME/.user_stack
+       echo "$user_stack" > "${HOME}/.user_stack"
+       local stacklink="$HOME/.config/mr/config.d/puppet-${user_stack}.mr"
+       if ! [[ -f $stacklink ]]; then
+           ln -s "../available.d/puppet-${user_stack}.mr" $stacklink 
+       fi
    fi
-   echo "${nixpkgs_ref}" > $HOME/.nixpkgs_ref
-}
+   echo "${nixpkgs_ref}" > "$HOME/.nixpkgs_ref"
+} 
 
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
 function install_dotfiles {
