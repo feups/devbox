@@ -147,7 +147,9 @@ You might want to enable some `oh-my-zsh` plugins by updating your zshrc. None h
 
 ### projects
 
-By default, there will be no project on the box. You will need to enable some `mr` repositories associated with your `hostgroup`.
+If you set a value for `user_stack` in the `params.sh` file, the puppet `mr` file for your stack will be activated for you. That means that the source for puppet for your stack will be automatically cloned into the puppet project directory (`~/projects/cicd/puppet/$stackname`).
+
+If you don't set the value, there will be no project on the box. You will need to enable some `mr` repositories associated with your `hostgroup`.
 
 For instance, for the `bos` hostgroup, you would do the following:
 
@@ -160,7 +162,6 @@ For instance, for the `bos` hostgroup, you would do the following:
 ```
 <1> you usually don't want to automatically update such repository on provisioning. That's the reason behind the `-f` (force) flag.
 
-By convention, all `cicd` projects will be placed inside the `/projects/cicd` folder hierarchy.
 
 ### cicd
 
