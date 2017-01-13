@@ -14,6 +14,7 @@ eclipse_geppetto=${eclipse_geppetto:=false}
 mr_template_repo_url=${mr_template_repo_url:="git://github.com/CIRB/vcsh_mr_template.git"}
 
 function setupEnvConfig {
+   git config --global branch.autosetuprebase always
    if [[ -n "$user_name" ]]; then
        git config --global user.name "$user_name"
    fi
