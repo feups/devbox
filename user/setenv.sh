@@ -14,7 +14,6 @@ eclipse_geppetto=${eclipse_geppetto:=false}
 mr_template_repo_url=${mr_template_repo_url:="git://github.com/CIRB/vcsh_mr_template.git"}
 
 function setupEnvConfig {
-   git config --global branch.autosetuprebase always
    if [[ -n "$user_name" ]]; then
        git config --global user.name "$user_name"
    fi
@@ -31,11 +30,11 @@ function setupEnvConfig {
        echo "$user_stack" > "${HOME}/.user_stack"
        local stacklink="$HOME/.config/mr/config.d/puppet-${user_stack}.mr"
        if ! [[ -f $stacklink ]]; then
-           ln -s "../available.d/puppet-${user_stack}.mr" $stacklink 
+           ln -s "../available.d/puppet-${user_stack}.mr" $stacklink
        fi
    fi
    echo "${nixpkgs_ref}" > "$HOME/.nixpkgs_ref"
-} 
+}
 
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
 function install_dotfiles {
