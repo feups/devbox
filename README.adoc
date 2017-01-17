@@ -42,7 +42,7 @@ In the host, pick a folder of your choice (where the `Vagrantfile` will sit). In
 1. create a directory `ssh-keys`.
 2. in the ssh-keys subfolder, copy your `Bitbucket` key pair, rename them 'cirb_rsa' and 'cirb_rsa.pub' respectively if the filename differs.
 3. in the ssh-keys subfolder, copy your `Github` key pair, rename them 'cirb_github_rsa' and 'cirb_github_rsa.pub'. If you use the same key pair, copy the previous pair and rename accordingly.
-4. optionally copy the https://github.com/CIRB/devbox/blob/master/user/params.sh[params file]. Do not copy/paste from Github UI, download source and edit to avoid unwanted characters.
+4. optionally copy the https://github.com/CIRB/devbox/blob/master/user/params.sh[params file] in the root of this repository. Do not copy/paste from Github UI, download source (https://raw.githubusercontent.com/CIRB/devbox/master/user/params.sh) and edit to avoid unwanted characters.
 
 ### box import
 
