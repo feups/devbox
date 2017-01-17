@@ -8,6 +8,7 @@
        plugins = [ ];
      })
     firefox
+    gitAndTools.tig
     # geany
   ];
 
