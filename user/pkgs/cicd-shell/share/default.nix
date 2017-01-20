@@ -1,8 +1,15 @@
 { salt-user, salt-pass, salt-url, zone  }:
-with import <nixpkgs> {};
+let
+  bootstrap = import <nixpkgs> { };
+in
+with import (bootstrap.fetchFromGitHub {
+    owner = "NixOS";
+    repo  = "nixpkgs";
+    inherit (builtins.fromJSON (builtins.readFile ./.nixpkgs.json)) rev sha256;
+  }) { };
 stdenv.mkDerivation {
   name = "pepper-env";
-  buildInputs = [ pepper jq haskellPackages.language-puppet_1_3_4];
+  buildInputs = [ pepper jq haskellPackages.language-puppet_1_3_4 ];
   shellHook = ''
   export SALTAPI_USER="${salt-user}"
   export SALTAPI_PASS="${salt-pass}"

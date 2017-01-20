@@ -1,7 +1,6 @@
 #! /usr/bin/env bash
 
 eclipse_version='4.5.2'
-export nixpkgs_ref="9d0a9bc9d61f6e94d720486ddbe972af8547382d" # http://hydra.nixos.org/build/45722781
 
 if [[ -f "/vagrant/params.sh" ]]; then
     source /vagrant/params.sh
@@ -33,7 +32,6 @@ function setupEnvConfig {
            ln -s "../available.d/puppet-${user_stack}.mr" $stacklink
        fi
    fi
-   echo "${nixpkgs_ref}" > "$HOME/.nixpkgs_ref"
 }
 
 # dotfiles for which a custom source repo can be specified in dotfiles.nix
@@ -117,4 +115,4 @@ if $eclipse_plugins; then
     fi
 fi
 setupEnvConfig
-nix-env -f '<nixpkgs>' -i cicd-shell -I "nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/${nixpkgs_ref}.tar.gz"
+nix-env -f '<nixpkgs>' -i cicd-shell
