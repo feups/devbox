@@ -4,7 +4,12 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
+- Update `cicd-shell` to 0.9.7
+
+## v2.3, 04/01/2017
+
 - The puppet repository for your default stack is now automatically cloned in the project folder.
++
 As an example, if you set in `params.sh` 'user_stack=fmx', the puppet repository for `fmx` will be cloned in `~/projects/cicd/puppet/fmx`.
 
 ## v2.2, 27/12/2016
