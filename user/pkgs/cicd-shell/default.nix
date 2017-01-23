@@ -1,5 +1,5 @@
 { mkDerivation, base, lens, optional-args, process, raw-strings-qq
-, stdenv, fetchgit, text, turtle
+, stdenv, fetchgit, text, turtle, jq, pepper
 }:
 mkDerivation {
   pname = "cicd-shell";
@@ -14,6 +14,7 @@ mkDerivation {
   executableHaskellDepends = [
     base lens optional-args process raw-strings-qq text turtle
   ];
+  executableSystemDepends = [ jq pepper ];
   homepage = "ssh://git@stash.cirb.lan:7999/cicd/salt-shell.git";
   license = stdenv.lib.licenses.bsd3;
 }
