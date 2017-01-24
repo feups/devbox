@@ -190,6 +190,7 @@
     df = " df -h";
     ag = "ag --color-line-number=3";
     vim = "nvim";
+    vi = "nvim";
     build = "./build/build.sh";
     see = "./bin/check_role.sh";
     heyaml = "./bin/eyaml.sh $@";
