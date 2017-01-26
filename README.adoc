@@ -37,12 +37,12 @@ toc::[]
 
 ### ssh keys
 
-In the host, pick a folder of your choice (where the `Vagrantfile` will sit). In this folder:
+In the host, pick a folder of your choice (where the `Vagrantfile` will sit) that will call `ROOT_DIR`. 
 
-1. create a directory `ssh-keys`.
+1. in `ROOT_DIR`, create a directory `ssh-keys`.
 2. in the ssh-keys subfolder, copy your `Bitbucket` key pair, rename them 'cirb_rsa' and 'cirb_rsa.pub' respectively if the filename differs.
 3. in the ssh-keys subfolder, copy your `Github` key pair, rename them 'cirb_github_rsa' and 'cirb_github_rsa.pub'. If you use the same key pair, copy the previous pair and rename accordingly.
-4. optionally copy the https://github.com/CIRB/devbox/blob/master/user/params.sh[params file] in the root of this repository. Do not copy/paste from Github UI, download source (https://raw.githubusercontent.com/CIRB/devbox/master/user/params.sh) and edit to avoid unwanted characters.
+4. in `ROOT_DIR`, optionally copy the https://github.com/CIRB/devbox/blob/master/user/params.sh[params file] to automate your personal setup (your credentials, the clone of your stack, the git config,...). Do not copy/paste from Github UI, download source (https://raw.githubusercontent.com/CIRB/devbox/master/user/params.sh) and edit to avoid unwanted characters.
 
 ### box import
 
@@ -54,11 +54,11 @@ vagrant box add devbox http://repo.irisnet.be/boxes/devbox.box <1>
 ```
 <1> You can also use 'devbox-novagrant.box' and maintain a Vagrantfile locally
 
-To initialize the box:
+To initialize the box, in `ROOT_DIR` do:
 ```
 vagrant init devbox && vagrant up
 ```
-NOTE: if you are using an older version of virtualbox (5.0.2x), you will have to *connect the cable*. See <<Troubleshooting>>
+NOTE: Always verify that the cable of the VM is connected as virtualbox (mainly older versions but has appeared with 5.1.2 too) has a bug not starting the network interface. If so, you will have to *connect the cable*. See <<Troubleshooting>>
 
 To finalize your first time setup, restart your box:
 ```
@@ -283,6 +283,7 @@ The size of the repackaged vagrant box is ~ 2G.
 Virtualbox 5.0.x::
 +
 For some host OS, Vagrant does not start its network interface. You will need to manually go to menu:Machine[Configuration > Network] and ensure the box "Cable Connected" is checked.
+This issue has also been encountered with virtualbox 5.1.2
 
 For Windows 10 users::
 +
