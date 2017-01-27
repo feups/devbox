@@ -4,6 +4,18 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
+[WARNING]
+.troubleshouting
+====
+While doing `vagrant provision` you might encounter an error related to an incompatible version of `local-configuration.nix`.
+`vagrant provision` don't override that file as it might contain personal settings. On the other hand, all changes in your local copy of the file (
+in the root directory of Windows where the `Vagrant` file is located) is synchronized.
+
+Please ensure that `local-configuration.nix` does not contain any `zsh` settings anymore (these settings have been moved to `configuration.nix`).
+
+If you need help, please join the `devbox` slack channel.
+====
+
 - Update `cicd-shell` to 0.9.7
 
 ## v2.3, 04/01/2017
