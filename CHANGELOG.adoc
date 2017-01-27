@@ -10,7 +10,7 @@ include::meta.adoc[]
 While doing `vagrant provision` you might encounter an error related to an incompatible version of `local-configuration.nix`.
 Indeed `vagrant provision` don't override that file as it might contain personal settings.
 
-Please ensure that `/etc/nixos/local-configuration.nix` does not contain any `zsh` settings (these settings have been moved to `configuration.nix`). The file should look like https://github.com/CIRB/devbox/blob/master/system/local-configuration.nix + your personal setting.
+Please ensure that `/etc/nixos/local-configuration.nix` does not contain any `zsh` settings (these settings have been moved to `configuration.nix`). The file should look like https://github.com/CIRB/devbox/blob/master/system/local-configuration.nix + your personal settings.
 
 If you need help, please join the `devbox` slack channel.
 ====
