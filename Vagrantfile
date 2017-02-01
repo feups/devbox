@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
       popd > /dev/null;
     fi
 
-    echo "Updating the configuration. Hold on. It might take a while.";
+    echo "Updating the configuration. Hold on. It will take a while (usually from 5 to 20 minutes)";
     nixos-rebuild switch --upgrade > /dev/null 2>&1;
   SHELL
 
