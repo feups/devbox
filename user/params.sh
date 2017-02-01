@@ -1,3 +1,7 @@
+# WARNING: This file is 'source' by a shell script
+# Don't use any space before or after the '=' sign
+# Ensure the file keeps its 'unix' file encoding (no Windows CR LF)
+
 # Your full user name e.g "John Doe"
 user_name=""
 # The email address you want to be registered for your 'git commit'
