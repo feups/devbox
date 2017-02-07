@@ -4,6 +4,30 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
+
+
+### box configuration
+
+The previous `params.sh` file has been replaced by two files:
+
+    - `config/box` (box parameters)
+    - `config/ad` (active directory credentials)
+
+[TIP]
+====
+- You will be warned beforehand if a configuration file is invalid.
+
+- The key `boxUserStacks` replaces the previous `user_stack` field and accepts a list of stacks.
+====
+
+## v2.5, 11/02/2017
+
+- Add `taffybar` a new status bar for xmonad.
+
+The previous xmobar status bar is still available via `ln -sf xmonad-xmobar.hs ~/.xmonad/xmonad.hs`.
+
+## v2.4, 23/01/2017
+
 [WARNING]
 .troubleshouting
 ====

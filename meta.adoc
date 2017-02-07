@@ -1,1 +1,1 @@
-:latest_revision: v2.4, 23/01/2017
+:latest_revision: v3.0, 10/04/2017

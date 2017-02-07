@@ -1,0 +1,22 @@
+name:                user-env
+version:             0.1.0.0
+license:             BSD3
+maintainer:          example@example.com
+copyright:           2017 Author name here
+category:            Web
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+executable user-env
+  main-is:             setenv.hs
+  ghc-options:         -Wno-missing-signatures -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , dhall >= 1.1
+                     , foldl >= 1.2
+                     , neat-interpolation >= 0.3
+                     , lens >= 4.14
+                     , text
+                     , turtle >= 1.3
+                     , vector >= 0.11
+  default-language:    Haskell2010

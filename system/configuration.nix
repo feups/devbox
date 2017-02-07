@@ -107,6 +107,7 @@
     shellcheck
     silver-searcher
     stalonetray
+    taffybar
     tmux
     tree
     unzip

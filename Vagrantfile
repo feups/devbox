@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
-    vb.memory = "3848"
+    vb.memory = "4000"
     vb.cpus = "2"
     vb.customize ["modifyvm", :id, "--vram", "64"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
@@ -42,14 +42,11 @@ Vagrant.configure("2") do |config|
       echo "Fetching ${version} configuration from ${scm_uri}";
       pushd /tmp/system > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
-      cp --verbose "${configdir}/system/configuration.nix" "/etc/nixos/configuration.nix";
-      cp --verbose -n "${configdir}/system/local-configuration.nix" "/etc/nixos/local-configuration.nix"
-      rsync -av --chmod=644 ${configdir}/system/pkgs/ /etc/cicd/
+      pushd ${configdir} > /dev/null;
+      make system
+      popd > /dev/null;
       popd > /dev/null;
     fi
-
-    echo "Updating the configuration. Hold on. It will take a while (usually from 5 to 20 minutes)";
-    nixos-rebuild switch --upgrade > /dev/null 2>&1;
   SHELL
 
   config.vm.provision "user", args: [scm_uri, scm_api], type: "shell" , name: "configure-user", privileged: false, inline: <<-SHELL
@@ -73,8 +70,7 @@ Vagrant.configure("2") do |config|
       pushd /tmp/user > /dev/null;
       curl -s -L ${scm_uri}/archive/${version}.tar.gz | tar xz;
       pushd ${configdir} > /dev/null;
-      chmod +x ./user/setenv.sh
-      ./user/setenv.sh
+      make user
       popd > /dev/null;
       popd > /dev/null;
     fi
