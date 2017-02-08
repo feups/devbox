@@ -96,14 +96,17 @@ vagrant provision
 vagrant destroy
 ```
 
-The provisioning is done automatically the first time `vagrant up` is executed. You can provision again later on by using `vagrant provision`. This is useful to check for a configuration update.
+The provisioning is done automatically the first time `vagrant up` is executed. It is safe to provision on a regular basis using the `vagrant provision` command on the host. This will bring new features listed in the <<_changelog>>. In case of a major version bump (which is expected two or three times a year), the box should be destroyed and downloaded again.
 
+[NOTE]
+====
 Provisioning is separated into two steps: `system` to configure the system and `user` to configure the vagrant user. You can selectively ask for provisioning using:
 
 ```
 vagrant provision --provision-with system
 vagrant provision --provision-with user
 ```
+====
 
 ### operating system
 
@@ -205,7 +208,7 @@ After changing the `local-configuration.nix` file, rebuild `nixos` by using this
 → sudo nixos-rebuild switch
 ```
 
-TIP: To avoid losing your customization after a `vagrant destroy`, copy `/etc/nixos/local-configuration.nix` into `/vagrant` on the boxfootnote:[The ROOT_DIR of the host is automatically mounted to /vagrant on the box given the box is started with `vagrant up`.]. If such a file exists on the ROOT_DIR of the host, it will be used the first time a box is provisioned and won't be overridden by a call to `vagrant provision`.
+TIP: To avoid losing your customization after a `vagrant destroy`, copy `/etc/nixos/local-configuration.nix` into `/vagrant` on the boxfootnote:[The ROOT_DIR of the host is automatically mounted to /vagrant on the box given the box is started with `vagrant up`.]. If such a file exists on the ROOT_DIR of the host, it will be used the first time a box is provisioned and won't be overridden by a call to `vagrant provision` later on.
 
 WARNING: More drastic changes such a changing the window manager is only possible via `/etc/nixos/configuration.nix`.
 
