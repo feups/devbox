@@ -197,8 +197,7 @@ For puppet help, go to the <<_puppet>> dedicated section.
 ### system
 
 You can add some specific configuration by editing `/etc/nixos/local-configuration.nix`.
-
-For instance if you want to install the `geany` package, just uncomment the adhoc line.
+For instance if you want to install the `geany` package, just uncomment the adhoc line in `local-configuration.nix`.
 
 After changing the `local-configuration.nix` file, rebuild `nixos` by using this command line:
 
@@ -206,7 +205,9 @@ After changing the `local-configuration.nix` file, rebuild `nixos` by using this
 → sudo nixos-rebuild switch
 ```
 
-`local-configuration.nix` is never overridden by a call for provisioning. To avoid losing your changes after a `vagrant destroy`, you might want to copy the file to `/vagrant`. In fact if `local-configuration.nix` exists on the host (where the `Vagrantfile` sits), it will be used the first time a box is provisioned.
+TIP: To avoid losing your customization after a `vagrant destroy`, copy `/etc/nixos/local-configuration.nix` into `/vagrant` on the boxfootnote:[The ROOT_DIR of the host is automatically mounted to /vagrant on the box given the box is started with `vagrant up`.]. If such a file exists on the ROOT_DIR of the host, it will be used the first time a box is provisioned and won't be overridden by a call to `vagrant provision`.
+
+WARNING: More drastic changes such a changing the window manager is only possible via `/etc/nixos/configuration.nix`.
 
 ### user
 
@@ -297,7 +298,7 @@ The size of the repackaged vagrant box is ~ 2G.
 
 Ssh-key with passphrase::
 +
-Using cirb ssh-keys with a passphrase will currently cause difficulties with `mr`, a tool we use to handle git repositories in a declarative way. It will prevent some of the automation to go through (nothing critical though). If possible, please regenerate a pair of keys with no passphrase and register them in stash.cirb.lanfootnote:[we will improve the situation in a future release if it is tagged as a major concern ].
+Using cirb ssh-keys with a passphrase will currently cause difficulties with `mr`, a tool we use to handle git repositories in a declarative way. It will prevent some of the automation to go through (nothing critical though). If possible, please regenerate a pair of keys with no passphrase and register them in stash.cirb.lanfootnote:[We will improve the situation in a future release if it is tagged as a major concern.].
 
 Virtualbox 5.0.x::
 +
@@ -330,7 +331,7 @@ Question, support, discussion are handled in the slack `#devbox` channel.
 The versioning scheme used is semantic: `major.minor.patch`. A major jump implies some incompatible changes likely from the `vagrantFile` and forces to:
 
 [lowerroman]
-. destroy the old box losing all current statefootnote:[the README describes several tricks to keep/store your customization] : `vagrant destroy`
+. destroy the old box losing all current statefootnote:[The README describes several tricks to keep/store your customization.] : `vagrant destroy`
 . remove the old box: `vagrant box remove devbox`
 . add the new one: `vagrant box add devbox http://repo.irisnet.be/boxes/devbox.box`
 . initialize the new box: `vagrant init devbox && vagrant up`
