@@ -5,8 +5,3 @@ user/result
 doc/devbox.*
 _site/
 *_brackets.html
-stack.yaml
-.stack-work/
-puppet.adoc
-build/
-cicd-shell.adoc
