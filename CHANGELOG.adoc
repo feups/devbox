@@ -4,6 +4,12 @@ include::meta.adoc[]
 
 ## {latest_revision}
 
+- Add taffybar a new status bar for xmonad
+The previous `xmobar` status bar is still available via `ln -sf xmonad-xmobar.hs ~/.xmonad/xmonad.hs` 
+
+
+## v2.4
+
 [WARNING]
 .troubleshouting
 ====
