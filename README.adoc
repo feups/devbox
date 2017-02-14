@@ -136,6 +136,8 @@ The devbox comes with a https://en.wikipedia.org/wiki/Tiling_window_manager[tili
 | kbd:[<Super> p] |Open Menu
 | kbd:[<Super> t] |New terminal
 | kbd:[<Super> 1..9] |Go to nth desktop
+| kbd:[<Super> <Right>] | Go to next desktop
+| kbd:[<Super> <Left>] | Go to previous desktop
 | kbd:[<Super> <Shift> 1..9] |Switch to nth desktop
 | kbd:[<Super> Space] |Change between horizontal, vertical and stack layout
 | kbd:[<Super> Tab] |In stack layout, switch the stacked window
