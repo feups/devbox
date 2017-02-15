@@ -6,8 +6,8 @@ mkDerivation {
   version = "0.9.9";
   src = fetchgit {
     url = "http://stash.cirb.lan/scm/cicd/cicd-shell.git";
-    rev = "774ba6ef8ddaf2c9bb1ad5e6df047097443ecbbd";
-    sha256 = "1q8v5hb5ny843djq1x4bs74mfry7qwq1flgb7i76zaqi4xg9rjfz";
+    rev = "be04b77ac4b9bccc979d553cb0a3d9e0b999cb2a";
+    sha256= "0d6sbpjgwqhpl3jkdmn420j3aqf69xnfi0fwf5qzfxi3ciz63fc4";
   };
   isLibrary = false;
   isExecutable = true;
