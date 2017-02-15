@@ -3,11 +3,11 @@
 }:
 mkDerivation {
   pname = "cicd-shell";
-  version = "0.9.9";
+  version = "0.9.10";
   src = fetchgit {
     url = "http://stash.cirb.lan/scm/cicd/cicd-shell.git";
-    rev = "be04b77ac4b9bccc979d553cb0a3d9e0b999cb2a";
-    sha256= "0d6sbpjgwqhpl3jkdmn420j3aqf69xnfi0fwf5qzfxi3ciz63fc4";
+    rev = "452e710591a52c0db350f8c50019a4edddab2a35";
+    sha256= "0hamwqirwi2xmh86xhknib4db6f64sqljr6xqghpnzzrc1nxy044";
   };
   isLibrary = false;
   isExecutable = true;
