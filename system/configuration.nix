@@ -69,6 +69,7 @@
 
   fonts = {
     enableFontDir = true;
+    enableGhostscriptFonts = true;
     fonts = [ pkgs.source-code-pro ];
   };
 
@@ -95,7 +96,42 @@
     maven
     mr
     nettools
-    neovim
+    vim
+    (vim_configurable.customize {
+      name = "vim";
+      vimrcConfig.vam.knownPlugins = vimPlugins // ({
+        puppet-vim = vimUtils.buildVimPluginFrom2Nix {
+          name = "puppet-vim";
+          src = fetchgit {
+            url = "https://github.com/rodjek/vim-puppet.git";
+            rev = "bffbd2955ef8025cbc3d8af0f3c929c07e4bd45f";
+            sha256 = "1kh7asvm4m9m25wqq370qmqxnq27cbqbcgd2r5zyadlnj5ymzp42";
+          };
+          dependencies = [];
+        };
+      });
+      vimrcConfig.customRC = ''
+        set hidden
+        set smartcase
+        set undofile
+        set hidden
+        set nobackup
+        set noswapfile
+        if has('unnamedplus')
+          set clipboard=unnamed,unnamedplus
+        endif
+        set t_Co=256
+
+      '';
+     vimrcConfig.vam.pluginDictionaries = [
+        { names = [
+          "puppet-vim"
+          "sensible"
+          "surround"
+          "Syntastic"
+        ]; }
+     ];
+     })
     netcat
     nix-repl
     nfs-utils
@@ -164,7 +200,6 @@
     du = " du -h";
     df = " df -h";
     ag = "ag --color-line-number=2";
-    vim = "nvim";
     build = "./build/build.sh";
     see = "./bin/check_role.sh";
     fixlint = "./bin/fix-lint.sh";
@@ -190,8 +225,7 @@
     duh = " du -h --max-depth=1";
     df = " df -h";
     ag = "ag --color-line-number=3";
-    vim = "nvim";
-    vi = "nvim";
+    vi = "vim";
     build = "./build/build.sh";
     see = "./bin/check_role.sh";
     heyaml = "./bin/eyaml.sh $@";
