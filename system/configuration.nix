@@ -95,15 +95,45 @@
     maven
     mr
     nettools
-    neovim
+    (neovim.override {
+      vimAlias = true;
+      configure = {
+        vam = {
+          knownPlugins = vimPlugins // ({
+            puppet-neovim = vimUtils.buildVimPluginFrom2Nix {
+              name = "puppet-neovim";
+              src = fetchgit {
+                url = "https://github.com/rodjek/vim-puppet.git";
+                rev = "bffbd2955ef8025cbc3d8af0f3c929c07e4bd45f";
+                sha256 = "1kh7asvm4m9m25wqq370qmqxnq27cbqbcgd2r5zyadlnj5ymzp42";
+              };
+              dependencies = [];
+            };
+          });
+          pluginDictionaries = [
+            { name = "surround";}
+            { name = "vim-colorschemes"; }
+            { name = "sensible"; }
+            # { name = "command-t";}
+            { name = "neomake";}
+            { name = "puppet-neovim";}
+          ];
+        };
+        customRC = ''
+          source /home/vagrant/.config/nvim/init.vim
+        '';
+      };
+    })
     netcat
     nix-repl
     nfs-utils
     nodejs
-    rsync
     oh-my-zsh
     parallel
     python
+    python3
+    rsync
+    ruby
     shellcheck
     silver-searcher
     stalonetray
@@ -164,7 +194,6 @@
     du = " du -h";
     df = " df -h";
     ag = "ag --color-line-number=2";
-    vim = "nvim";
     build = "./build/build.sh";
     see = "./bin/check_role.sh";
     fixlint = "./bin/fix-lint.sh";
@@ -190,8 +219,7 @@
     duh = " du -h --max-depth=1";
     df = " df -h";
     ag = "ag --color-line-number=3";
-    vim = "nvim";
-    vi = "nvim";
+    vi = "vim";
     build = "./build/build.sh";
     see = "./bin/check_role.sh";
     heyaml = "./bin/eyaml.sh $@";
