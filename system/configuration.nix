@@ -69,6 +69,7 @@
 
   fonts = {
     enableFontDir = true;
+    enableGhostscriptFonts = true;
     fonts = [ pkgs.source-code-pro ];
   };
 
@@ -95,35 +96,42 @@
     maven
     mr
     nettools
-    (neovim.override {
-      vimAlias = true;
-      configure = {
-        vam = {
-          knownPlugins = vimPlugins // ({
-            puppet-neovim = vimUtils.buildVimPluginFrom2Nix {
-              name = "puppet-neovim";
-              src = fetchgit {
-                url = "https://github.com/rodjek/vim-puppet.git";
-                rev = "bffbd2955ef8025cbc3d8af0f3c929c07e4bd45f";
-                sha256 = "1kh7asvm4m9m25wqq370qmqxnq27cbqbcgd2r5zyadlnj5ymzp42";
-              };
-              dependencies = [];
-            };
-          });
-          pluginDictionaries = [
-            { name = "surround";}
-            { name = "vim-colorschemes"; }
-            { name = "sensible"; }
-            # { name = "command-t";}
-            { name = "neomake";}
-            { name = "puppet-neovim";}
-          ];
+    vim
+    (vim_configurable.customize {
+      name = "vim";
+      vimrcConfig.vam.knownPlugins = vimPlugins // ({
+        puppet-vim = vimUtils.buildVimPluginFrom2Nix {
+          name = "puppet-vim";
+          src = fetchgit {
+            url = "https://github.com/rodjek/vim-puppet.git";
+            rev = "bffbd2955ef8025cbc3d8af0f3c929c07e4bd45f";
+            sha256 = "1kh7asvm4m9m25wqq370qmqxnq27cbqbcgd2r5zyadlnj5ymzp42";
+          };
+          dependencies = [];
         };
-        customRC = ''
-          source /home/vagrant/.config/nvim/init.vim
-        '';
-      };
-    })
+      });
+      vimrcConfig.customRC = ''
+        set hidden
+        set smartcase
+        set undofile
+        set hidden
+        set nobackup
+        set noswapfile
+        if has('unnamedplus')
+          set clipboard=unnamed,unnamedplus
+        endif
+        set t_Co=256
+
+      '';
+     vimrcConfig.vam.pluginDictionaries = [
+        { names = [
+          "puppet-vim"
+          "sensible"
+          "surround"
+          "Syntastic"
+        ]; }
+     ];
+     })
     netcat
     nix-repl
     nfs-utils
