@@ -118,7 +118,7 @@ installMrRepos =  do
          ExitFailure _ -> do
            ppFailure ("Unable to clone mr" <+> ppText url <> "\n")
            die "Aborting user configuration"
-         ExitSuccess   -> pure ()
+         ExitSuccess   -> ppSuccess ("Clone mr" <+> ppText url <> "\n")
     activate_stacks home_dir stacks = sh $ do
       stack <- select (stacks^..traverse.strict) :: Shell Text
       unless (Text.null stack) $ do
@@ -185,7 +185,7 @@ installEclipsePlugins = do
                                    , "-nosplash"
                                    ] empty
         case exitcode of
-          ExitFailure _ -> ppFailure ("Eclipse plugin" <+> ppText full_name <+> "won't installed\n\n")
+          ExitFailure _ -> ppFailure ("Eclipse plugin" <+> ppText full_name <+> "won't installed\n")
           ExitSuccess -> ppSuccess ("Eclipse plugin" <+> ppText full_name <+> "\n")
 
 configureGit :: (MonadIO m, MonadReader ScriptEnv m) => m ()
@@ -209,7 +209,7 @@ installCicdShell = do
   output (homedir </> ".user_pwd") $ pure usr_pwd
   shell "nix-env -f '<nixpkgs>' -i cicd-shell" empty >>= \case
     ExitSuccess   -> ppSuccess "cicd shell\n"
-    ExitFailure _ -> ppFailure "enable to install the cicd shell\n\n"
+    ExitFailure _ -> ppFailure "enable to install the cicd shell\n"
 
 main :: IO ()
 main = do
