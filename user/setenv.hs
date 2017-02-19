@@ -102,22 +102,23 @@ installMrRepos =  do
   homedir <- asks (view homeDir)
   mr_url <- asks $ view (boxConfig.mrRepoUrl.strict)
   stacks <- asks $ view (boxConfig.userStacks)
+  bootstrap <- not <$> testfile (homedir </> ".mrconfig")
+  when bootstrap $ clone_mr mr_url
   activate_stacks homedir stacks
-  exitcode <- testfile (homedir </> ".mrconfig") >>= \case
-    False -> do
-      proc "vcsh" ["clone"
-                  , mr_url
-                  , "mr"] empty
-      .&&. proc "mr" [ "-f"
-                     , "-d", format fp homedir
-                     , "up" ] empty
-      .||. signal_mr_clone_failure mr_url
-    True -> proc "mr" [ "-d", format fp homedir
-                      , "up", "-q"] empty
-  case exitcode of
-    ExitFailure _ -> ppFailure "Unable to install all mr repositories\n\n"
+  proc "mr" [ "-d", format fp homedir
+            , "up", "-q"
+            , (if bootstrap then "-f" else mempty)] empty >>= \case
+    ExitFailure _ -> ppFailure "Unable to update all mr repositories\n\n"
     ExitSuccess   -> ppSuccess "mr repositories\n"
   where
+    clone_mr url = do
+      proc "vcsh" ["clone"
+                  , url
+                  , "mr"] empty >>= \case
+         ExitFailure _ -> do
+           ppFailure ("Unable to clone mr" <+> ppText url <> "\n")
+           die "Aborting user configuration"
+         ExitSuccess   -> pure ()
     activate_stacks home_dir stacks = sh $ do
       stack <- select (stacks^..traverse.strict) :: Shell Text
       unless (Text.null stack) $ do
@@ -126,9 +127,6 @@ installMrRepos =  do
             link_name = format (fp%"/.config/mr/config.d/"%s) home_dir mr_file
         printf ("Activate "%s%"\n") mr_file
         procs "ln" [ "-sf", link_target, link_name] empty
-    signal_mr_clone_failure url = do
-      printf ("Enable to clone and install mr '"%s%"'.\n") url
-      pure (ExitFailure 1)
 
 installDoc :: (MonadIO m, MonadReader ScriptEnv m) => m ()
 installDoc = do
@@ -231,7 +229,7 @@ main = do
 ppText = PP.text . Text.unpack
 
 ppFailure :: MonadIO m => PP.Doc -> m ()
-ppFailure msg = liftIO $ putDoc $ red "FAILURE:" <+> msg
+ppFailure msg = liftIO $ putDoc $ (red "FAILURE:" <+> msg) <> line
 
 ppSuccess :: MonadIO m => PP.Doc -> m ()
 ppSuccess msg = liftIO $ putDoc (dullgreen ("Done with" <+> msg) <> line)
