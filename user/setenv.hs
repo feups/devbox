@@ -105,9 +105,10 @@ installMrRepos =  do
   bootstrap <- not <$> testfile (homedir </> ".mrconfig")
   when bootstrap $ clone_mr mr_url
   activate_stacks homedir stacks
-  proc "mr" [ "-d", format fp homedir
-            , "up", "-q"
-            , (if bootstrap then "-f" else mempty)] empty >>= \case
+  let mr_args = [ "-d", format fp homedir
+                , "up", "-q"
+                ]
+  proc "mr" (if bootstrap then "-f" : mr_args else mr_args) empty >>= \case
     ExitFailure _ -> ppFailure "Unable to update all mr repositories\n\n"
     ExitSuccess   -> ppSuccess "mr repositories\n"
   where
